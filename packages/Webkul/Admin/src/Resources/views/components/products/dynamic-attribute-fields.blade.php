@@ -210,6 +210,7 @@
                         @php $currencyValue = $value[$currency->code] ?? ''; @endphp
                         <div class="grid w-full">
                             <x-admin::form.control-group.control
+                                class="focus:outline-none"
                                 type="price"
                                 :id="$field->code"
                                 :name="$fieldName . '[' . $currency->code . ']'"
