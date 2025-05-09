@@ -736,9 +736,6 @@ class Importer extends AbstractImporter
         $imageDirPath = $this->import->images_directory_path;
 
         foreach ($rowData as $attributeCode => $value) {
-            if (is_null($value)) {
-                continue;
-            }
             /**
              * Since Price column is added like this price (USD) the below function formats and returns the actual attributeCode from the columnName
              */
