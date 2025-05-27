@@ -204,15 +204,14 @@ class ProductController extends Controller
 
             $e = $e::withMessages($messages);
 
-            Log::debug($e);
+            Log::debug($e->getMessage());
 
             session()->flash('error', trans('admin::app.catalog.products.update-failure'));
 
             throw $e;
         }
 
-        $needUpdate = $this->checkUpdateProduct($data, $product);
-        if ($needUpdate) {
+        if ($product->isDirty(data: $data)) {
             $product = $this->productRepository->update($data, $id);
         }
 
@@ -225,96 +224,6 @@ class ProductController extends Controller
             'channel' => core()->getRequestedChannelCode(),
             'locale'  => core()->getRequestedLocaleCode(),
         ]);
-    }
-
-    /**
-     * Check if product need update
-     * */
-    private function checkUpdateProduct(array $data, object $product): bool
-    {
-        $newValues = $data['values'] ?? [];
-        $existingValues = $product->values ?? [];
-
-        if ($this->hasDifferenceProduct($newValues, $existingValues)) {
-            return true;
-        }
-
-        $newVariants = $data['variants'] ?? [];
-        $existingVariants = $product->variants ?? [];
-
-        if ($existingVariants instanceof \Illuminate\Database\Eloquent\Collection) {
-            $existingVariantsArray = [];
-            foreach ($existingVariants as $variant) {
-                $existingVariantsArray[$variant->id] = $variant->toArray();
-            }
-            $existingVariants = $existingVariantsArray;
-        }
-
-        if (count($newVariants) !== count($existingVariants)) {
-            return true;
-        }
-
-        foreach ($newVariants as $variantId => $variantData) {
-            if (! isset($existingVariants[$variantId])) {
-                return true;
-            }
-
-            if (
-                isset($variantData['values'])
-                && $this->hasDifferenceProduct($variantData['values'], $existingVariants[$variantId]['values'] ?? [])
-            ) {
-                return true;
-            }
-
-            if (
-                isset($variantData['sku'])
-                && $variantData['sku'] !== ($existingVariants[$variantId]['sku'] ?? '')
-            ) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Check if there's a difference between two arrays
-     */
-    private function hasDifferenceProduct(array $new, array $existing): bool
-    {
-        foreach ($new as $key => $value) {
-            if (empty($value)) {
-                continue;
-            }
-
-            if (! array_key_exists($key, $existing)) {
-                return true;
-            }
-
-            $existingValue = $existing[$key];
-
-            if (is_array($value)) {
-                if (! is_array($existingValue)) {
-                    return true;
-                }
-
-                if ($this->hasDifferenceProduct($value, $existingValue)) {
-                    return true;
-                }
-            } else {
-                if ((string) $value !== (string) $existingValue) {
-                    return true;
-                }
-            }
-        }
-
-        foreach ($existing as $key => $value) {
-            if (array_key_exists($key, $new) && ! is_null($new[$key]) && ! array_key_exists($key, $new)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

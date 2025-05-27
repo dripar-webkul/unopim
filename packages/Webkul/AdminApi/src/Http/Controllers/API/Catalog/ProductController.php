@@ -86,7 +86,7 @@ class ProductController extends ApiController
             $product->status = (int) $data['status'];
         }
 
-        if ($product->isDirty()) {
+        if ($product->isDirty(data: $data)) {
             $product->update($data);
         }
 

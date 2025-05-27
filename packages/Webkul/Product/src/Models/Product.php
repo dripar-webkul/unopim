@@ -142,7 +142,8 @@ class Product extends Model implements HistoryAuditable, PresentableHistoryInter
      */
     public function getAttribute($key)
     {
-        if (! method_exists(static::class, $key)
+        if (
+            ! method_exists(static::class, $key)
             && ! in_array($key, [
                 'pivot',
                 'parent_id',
@@ -329,5 +330,103 @@ class Product extends Model implements HistoryAuditable, PresentableHistoryInter
             'additional_data' => $this->additional_data,
             'image'           => $image,
         ];
+    }
+
+    /**
+     * Determine if the model or any of the given attribute(s) have been modified.
+     *
+     * @param  array|string|null  $attributes
+     */
+    public function isDirty($data = null): bool
+    {
+        if (! $data) {
+            return parent::isDirty();
+        }
+
+        $newValues = $data['values'] ?? [];
+        $existingValues = $this->getOriginal('values') ?? [];
+
+        if ($this->hasDifferenceProduct($newValues, $existingValues)) {
+            return true;
+        }
+
+        $newVariants = $data['variants'] ?? [];
+        $existingVariantsCollection = $this->variants()->get();
+
+        $existingVariants = [];
+        foreach ($existingVariantsCollection as $variant) {
+            $existingVariants[$variant->id] = $variant->toArray();
+        }
+
+        $newVariantIds = array_keys($newVariants);
+        $existingVariantIds = array_keys($existingVariants);
+
+        $removedVariantIds = array_diff($existingVariantIds, $newVariantIds);
+        if (! empty($removedVariantIds)) {
+            return true;
+        }
+
+        foreach ($newVariants as $variantId => $variantData) {
+            if (! isset($existingVariants[$variantId])) {
+                return true;
+            }
+
+            if (
+                isset($variantData['values'])
+                && $this->hasDifferenceProduct($variantData['values'], $existingVariants[$variantId]['values'] ?? [])
+            ) {
+                return true;
+            }
+
+            if (
+                isset($variantData['sku'])
+                && $variantData['sku'] !== ($existingVariants[$variantId]['sku'] ?? '')
+            ) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Check if there's a difference between two arrays
+     */
+    private function hasDifferenceProduct(array $new, array $existing): bool
+    {
+
+        foreach ($new as $key => $value) {
+            if (empty($value)) {
+                continue;
+            }
+
+            if (! array_key_exists($key, $existing)) {
+                return true;
+            }
+
+            $existingValue = $existing[$key];
+
+            if (is_array($value)) {
+                if (! is_array($existingValue)) {
+                    return true;
+                }
+
+                if ($this->hasDifferenceProduct($value, $existingValue)) {
+                    return true;
+                }
+            } else {
+                if ((string) $value !== (string) $existingValue) {
+                    return true;
+                }
+            }
+        }
+
+        foreach ($existing as $key => $value) {
+            if (array_key_exists($key, $new) && ! is_null($new[$key]) && ! array_key_exists($key, $new)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
