@@ -204,7 +204,7 @@ class ProductController extends Controller
 
             $e = $e::withMessages($messages);
 
-            Log::debug($e);
+            Log::debug($e->getMessage());
 
             session()->flash('error', trans('admin::app.catalog.products.update-failure'));
 

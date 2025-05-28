@@ -155,6 +155,11 @@ class AttributeFamilyController extends Controller
 
         $requestData = request()->except(['code']);
 
+        $checkSuperAttributes = $this->checkSuperAttributesRemoval($id, $requestData);
+        if ($checkSuperAttributes) {
+            return $checkSuperAttributes;
+        }
+
         Event::dispatch('catalog.attribute_family.update.before', $id);
 
         $attributeFamily = $this->attributeFamilyRepository->update($requestData, $id);
@@ -164,6 +169,45 @@ class AttributeFamilyController extends Controller
         session()->flash('success', trans('admin::app.catalog.families.update-success'));
 
         return redirect()->route('admin.catalog.families.edit', $id);
+    }
+
+    /**
+     * Check if super attributes are removed or not
+     *
+     * @param  int  $id  attribute family id
+     * @param  array  $requestData  request data
+     * @return \Illuminate\Http\Response
+     */
+    protected function checkSuperAttributesRemoval(int $id, array $requestData)
+    {
+        $attributeFamily = $this->attributeFamilyRepository->findOrFail($id);
+        $currentAttributes = $attributeFamily->customAttributes()->pluck('id')->toArray();
+        $requestedAttributes = collect($requestData['attribute_groups'] ?? [])
+            ->pluck('custom_attributes.*.id')
+            ->flatten()
+            ->filter()
+            ->toArray();
+
+        $removedAttributes = array_diff($currentAttributes, $requestedAttributes);
+        foreach ($removedAttributes as $attributeId) {
+            $isUsedAsSuperAttribute = $attributeFamily->products()
+                ->whereHas('super_attributes', function ($query) use ($attributeId) {
+                    $query->where('attribute_id', $attributeId);
+                })
+                ->exists();
+
+            if ($isUsedAsSuperAttribute) {
+                $attributeName = $this->attributeFamilyRepository->getAttributeNameById($attributeId);
+
+                session()->flash('error', trans('admin::app.catalog.families.attribute-removal-error', [
+                    'name' => $attributeName ?? ' ',
+                ]));
+
+                return redirect()->route('admin.catalog.families.edit', $id)->withInput();
+            }
+        }
+
+        return false;
     }
 
     /**

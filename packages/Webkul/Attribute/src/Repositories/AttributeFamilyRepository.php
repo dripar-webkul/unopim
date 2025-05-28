@@ -4,6 +4,7 @@ namespace Webkul\Attribute\Repositories;
 
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Event;
+use Webkul\Attribute\Models\AttributeTranslation;
 use Webkul\Core\Eloquent\Repository;
 
 class AttributeFamilyRepository extends Repository
@@ -17,7 +18,9 @@ class AttributeFamilyRepository extends Repository
         protected AttributeRepository $attributeRepository,
         protected AttributeGroupRepository $attributeGroupRepository,
         protected AttributeFamilyGroupMappingRepository $attributeFamilyGroupMappingRepository,
+        protected AttributeTranslation $attributeTranslationModel,
         Container $container
+
     ) {
         parent::__construct($container);
     }
@@ -202,5 +205,21 @@ class AttributeFamilyRepository extends Repository
             'translations',
             'attributeFamilyGroupMappings.customAttributes',
         ]);
+    }
+
+    /** This function returns the attribute name by its ID.
+     * @param  int  $id  attribute ID
+     * @return string attribute name
+     */
+    public function getAttributeNameById($attributeId)
+    {
+        return $this->attributeTranslationModel
+            ->where('attribute_id', $attributeId)
+            ->where('locale', app()->getLocale())
+            ->value('name')
+            ?? $this->attributeTranslationModel
+                ->where('attribute_id', $attributeId)
+                ->where('locale', config('app.fallback_locale'))
+                ->value('name');
     }
 }

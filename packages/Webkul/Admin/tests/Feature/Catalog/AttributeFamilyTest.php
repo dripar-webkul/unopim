@@ -3,6 +3,7 @@
 use Webkul\Attribute\Models\Attribute;
 use Webkul\Attribute\Models\AttributeFamily;
 use Webkul\Attribute\Models\AttributeGroup;
+use Webkul\Attribute\Repositories\AttributeFamilyRepository;
 use Webkul\Product\Models\Product;
 
 it('should return the family index datgrid page', function () {
@@ -211,4 +212,98 @@ it('should not delete the family if the family has any products', function () {
         'id'   => $family->id,
         'code' => $family->code,
     ]);
+});
+
+it('should prevent removal of attributes used as super attributes', function () {
+    $this->loginAsAdmin();
+
+    $attributeFamilyRepository = app(AttributeFamilyRepository::class);
+
+    $family = AttributeFamily::factory()->create();
+    $attribute = Attribute::factory()->create();
+    $attributeGroup = AttributeGroup::factory()->create();
+
+    $data = [
+        'attribute_groups' => [
+            $attributeGroup->id => [
+                'position'                 => 1,
+                'attribute_groups_mapping' => null,
+                'custom_attributes'        => [
+                    ['id' => $attribute->id, 'position' => 1],
+                ],
+            ],
+        ],
+    ];
+
+    $attributeFamilyRepository->update($data, $family->id);
+
+    $product = Product::factory()->create([
+        'attribute_family_id' => $family->id,
+    ]);
+
+    $product->super_attributes()->attach($attribute);
+
+    $updateData = [
+        'code'             => $family->code,
+        'attribute_groups' => [
+            $attributeGroup->id => [
+                'position'                 => 1,
+                'attribute_groups_mapping' => null,
+                'custom_attributes'        => [],
+            ],
+        ],
+    ];
+
+    $this->put(route('admin.catalog.families.update', $family->id), $updateData)
+        ->assertRedirect(route('admin.catalog.families.edit', $family->id))
+        ->assertSessionHas('error', trans('admin::app.catalog.families.attribute-removal-error', [
+            'name' => ' ',
+        ]));
+});
+
+it('should successfully update attribute family when not removing super attributes', function () {
+    $this->loginAsAdmin();
+
+    $attributeFamilyRepository = app(AttributeFamilyRepository::class);
+
+    $family = AttributeFamily::factory()->create();
+    $attribute = Attribute::factory()->create();
+    $attributeGroup = AttributeGroup::factory()->create();
+
+    $data = [
+        'attribute_groups' => [
+            $attributeGroup->id => [
+                'position'                 => 1,
+                'attribute_groups_mapping' => null,
+                'custom_attributes'        => [
+                    ['id' => $attribute->id, 'position' => 1],
+                ],
+            ],
+        ],
+    ];
+
+    $attributeFamilyRepository->update($data, $family->id);
+
+    $product = Product::factory()->create([
+        'attribute_family_id' => $family->id,
+    ]);
+
+    $product->super_attributes()->attach($attribute);
+
+    $updateData = [
+        'code'             => $family->code,
+        'attribute_groups' => [
+            $attributeGroup->id => [
+                'position'                 => 1,
+                'attribute_groups_mapping' => null,
+                'custom_attributes'        => [
+                    ['id' => $attribute->id, 'position' => 1],
+                ],
+            ],
+        ],
+    ];
+
+    $this->put(route('admin.catalog.families.update', $family->id), $updateData)
+        ->assertRedirect(route('admin.catalog.families.edit', $family->id))
+        ->assertSessionHas('success', trans('admin::app.catalog.families.update-success'));
 });
