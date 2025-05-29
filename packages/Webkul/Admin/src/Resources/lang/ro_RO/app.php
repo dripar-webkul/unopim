@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'Nu poți șterge o familie de atribute de sistem.',
             'not-found'                      => 'Familia de atribute cu codul ":code" nu a fost găsită.',
             'can-not-update-variant-options' => 'Nu se pot actualiza opțiunile de configurare deoarece această familie are deja variante de produse.',
+            'attribute-removal-error'        => 'Atributul :name este folosit ca un super atribut și nu poate fi eliminat',
         ],
 
         'history' => [

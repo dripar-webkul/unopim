@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'Nie możesz usunąć rodziny atrybutów systemowych.',
             'not-found'                      => 'Rodzina atrybutów o kodzie ":code" nie została znaleziona.',
             'can-not-update-variant-options' => 'Nie można zaktualizować opcji konfiguracji, ponieważ ta rodzina ma już warianty produktów.',
+            'attribute-removal-error'        => 'Atrybut :name jest używany jako atrybut nadrzędny i nie może zostać usunięty',
         ],
 
         'history' => [

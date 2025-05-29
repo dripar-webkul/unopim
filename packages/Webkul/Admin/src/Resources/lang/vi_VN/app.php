@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'Không thể xóa gia đình thuộc tính hệ thống.',
             'not-found'                      => 'Không tìm thấy gia đình thuộc tính với mã ":code".',
             'can-not-update-variant-options' => 'Không thể cập nhật tùy chọn cấu hình vì gia đình này đã có sản phẩm biến thể.',
+            'attribute-removal-error'        => 'Thuộc tính :name được sử dụng như một siêu thuộc tính và không thể bị xóa',
         ],
 
         'history' => [

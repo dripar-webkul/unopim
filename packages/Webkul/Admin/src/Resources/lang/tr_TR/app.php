@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'Bir sistem özelliği ailesi silinemez.',
             'not-found'                      => '":code" kodlu özellik ailesi bulunamadı.',
             'can-not-update-variant-options' => 'Bu ailede zaten ürün varyantları olduğu için konfigürasyon seçenekleri güncellenemiyor.',
+            'attribute-removal-error'        => 'Thuộc tính :name được sử dụng như một siêu thuộc tính và không thể bị xóa',
         ],
 
         'history' => [

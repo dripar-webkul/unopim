@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'No se puede eliminar la familia de atributos del sistema.',
             'not-found'                      => 'No se encontró la familia de atributos con el código ":code".',
             'can-not-update-variant-options' => 'No se pueden actualizar las opciones de configuración porque esta familia ya tiene variantes de productos.',
+            'attribute-removal-error'        => 'El atributo :name se utiliza como un superatributo y no se puede eliminar',
         ],
 
         'history' => [

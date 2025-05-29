@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'Ne možete izbrisati sustavsku atributnu obitelj',
             'not-found'                      => 'Atributna obitelj s kodom ":code" nije pronađena',
             'can-not-update-variant-options' => 'Ne možete ažurirati opcije konfiguracije jer ova obitelj već ima varijante proizvoda.',
+            'attribute-removal-error'        => 'Atribut :name koristi se kao super atribut i ne može se ukloniti',
         ],
 
         'history' => [

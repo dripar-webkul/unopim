@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'Hindi mo maaaring tanggalin ang isang pamilya ng mga system attribute.',
             'not-found'                      => 'Hindi natagpuan ang pamilya ng mga katangian na may kodigo ":code".',
             'can-not-update-variant-options' => 'Hindi ma-update ang mga opsyon ng configuration dahil mayroon nang mga produkto ng variant sa pamilya.',
+            'attribute-removal-error'        => 'L attributo :name è utilizzato come super attributo e non può essere rimosso',
         ],
 
         'history' => [

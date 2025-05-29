@@ -856,6 +856,7 @@ return [
             'user-define-error'              => 'Tidak dapat menghapus keluarga atribut sistem',
             'not-found'                      => 'Atribut keluarga dengan kode ":code" tidak dapat ditemukan',
             'can-not-update-variant-options' => 'Tidak dapat memperbarui opsi yang dapat dikonfigurasi karena keluarga ini sudah memiliki produk varian.',
+            'attribute-removal-error'        => 'Atribut :name digunakan sebagai atribut super dan tidak dapat dihapus',
         ],
 
         'history' => [

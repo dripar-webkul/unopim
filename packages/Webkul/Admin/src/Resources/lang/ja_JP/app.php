@@ -855,6 +855,7 @@ return [
             'user-define-error'              => 'システム属性ファミリを削除できません',
             'not-found'                      => 'コード ":code" の属性ファミリが見つかりませんでした',
             'can-not-update-variant-options' => 'このファミリにはすでにバリアント製品があるため、構成可能なオプションを更新できません。',
+            'attribute-removal-error'        => '属性 :name はスーパー属性として使用されており、削除できません',
         ],
 
         'history' => [

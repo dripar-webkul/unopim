@@ -854,6 +854,7 @@ return [
             'user-define-error'              => '無法刪除系統屬性家族。',
             'not-found'                      => '找不到代碼 ":code" 的屬性家族。',
             'can-not-update-variant-options' => '此家族已有產品變體，因此無法更新配置選項。',
+            'attribute-removal-error'        => '屬性 :name 被作為超級屬性使用，無法刪除',
         ],
 
         'history' => [

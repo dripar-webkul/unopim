@@ -855,6 +855,7 @@ return [
             'user-define-error'              => '无法删除系统属性家庭',
             'not-found'                      => '无法找到代码为“:code”的属性系列',
             'can-not-update-variant-options' => '无法更新可配置的选项，因为该家族已经拥有变体产品。',
+            'attribute-removal-error'        => '属性 :name 被用作超级属性，无法删除',
         ],
 
         'history' => [

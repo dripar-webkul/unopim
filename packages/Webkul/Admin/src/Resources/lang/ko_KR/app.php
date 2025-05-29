@@ -854,6 +854,7 @@ return [
             'user-define-error'              => '시스템 속성 가족은 삭제할 수 없습니다.',
             'not-found'                      => '코드 ":code"에 해당하는 속성 그룹을 찾을 수 없습니다.',
             'can-not-update-variant-options' => '이 가족에는 이미 제품 변형이 있어 구성 옵션을 업데이트할 수 없습니다.',
+            'attribute-removal-error'        => '속성 :name 은(는) 슈퍼 속성으로 사용되며 제거할 수 없습니다',
         ],
 
         'history' => [

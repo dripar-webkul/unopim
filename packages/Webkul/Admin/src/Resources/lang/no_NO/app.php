@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'Du kan ikke slette en systemattributtfamilie',
             'not-found'                      => 'Attributtfamilie med kode ":code" ble ikke funnet.',
             'can-not-update-variant-options' => 'Kan ikke oppdatere konfigurasjonsalternativer, fordi denne familien allerede har produktvarianter.',
+            'attribute-removal-error'        => 'Attributtet :name brukes som et superattributt og kan ikke fjernes',
         ],
 
         'history' => [

@@ -854,6 +854,7 @@ return [
             'user-define-error'              => 'Cannot delete system attribute family',
             'not-found'                      => 'Attribute family with code ":code" could not be found',
             'can-not-update-variant-options' => 'Cannot update configurable options as this family already has variant products.',
+            'attribute-removal-error'        => 'The attribute :name is used as a super attribute and cannot be removed',
         ],
 
         'history' => [

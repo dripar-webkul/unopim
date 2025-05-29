@@ -857,6 +857,7 @@ return [
             'user-define-error'              => 'Kan geen systeem voor het kenmerken van het systeem verwijderen',
             'not-found'                      => 'Attributen Family with Code ":Code" kon niet worden gevonden',
             'can-not-update-variant-options' => 'Kan configureerbare opties niet bijwerken, omdat deze familie al variantproducten heeft.',
+            'attribute-removal-error'        => 'Het attribuut :name wordt gebruikt als superattribuut en kan niet worden verwijderd',
         ],
 
         'history' => [

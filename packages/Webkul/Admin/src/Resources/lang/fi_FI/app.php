@@ -853,6 +853,7 @@ return [
             'user-define-error'              => 'Et voi poistaa järjestelmäattribuuttiperhettä',
             'not-found'                      => 'Attribuuttiperheellä, jonka koodi on ":code", ei löytynyt',
             'can-not-update-variant-options' => 'Ei voida päivittää määritettäviä vaihtoehtoja, koska tällä perheellä on jo varianttituotteita.',
+            'attribute-removal-error'        => 'Attribuuttia :name käytetään superattribuuttina eikä sitä voi poistaa',
         ],
 
         'history' => [
