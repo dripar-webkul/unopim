@@ -394,7 +394,6 @@ class Product extends Model implements HistoryAuditable, PresentableHistoryInter
      */
     private function hasDifferenceProduct(array $new, array $existing): bool
     {
-
         foreach ($new as $key => $value) {
             if (empty($value)) {
                 continue;
