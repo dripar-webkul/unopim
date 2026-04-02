@@ -59,4 +59,3 @@ class AppServiceProvider extends ServiceProvider
         }
     }
 }
-// intentional pint violation
