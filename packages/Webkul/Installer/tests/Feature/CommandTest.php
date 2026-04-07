@@ -3,7 +3,6 @@
 use Webkul\Installer\Console\Commands\Installer;
 use Webkul\User\Models\Admin;
 
-
 it('should ask for email if email option is not provided in the command', function () {
     $this->artisan('unopim:user:create', [
         '--name'      => 'New User',
