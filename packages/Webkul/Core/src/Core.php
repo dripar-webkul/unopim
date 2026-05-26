@@ -468,7 +468,15 @@ class Core
      */
     public function currencySymbol($currency)
     {
-        $code = $currency instanceof Contracts\Currency ? $currency->code : $currency;
+        $model = $currency instanceof Contracts\Currency
+            ? $currency
+            : $this->getAllCurrencies()->where('code', $currency)->first();
+
+        if ($model && ! empty($model->symbol)) {
+            return $model->symbol;
+        }
+
+        $code = $model->code ?? $currency;
 
         $formatter = new \NumberFormatter(app()->getLocale().'@currency='.$code, \NumberFormatter::CURRENCY);
 
