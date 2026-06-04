@@ -114,6 +114,14 @@ jobs:
           sed -i "s|^\(DB_PASSWORD=\s*\).*$|\1root|" .env
 
       - name: Running UnoPim Installer & Start Server
+        env:
+          # Use the repo secrets if set; otherwise fall back to the literal creds
+          # login.js defaults to (admin@example.com / admin123). Without a value
+          # the hardened AdminsTableSeeder generates a RANDOM password and every
+          # Playwright login fails. The fallback also covers fork PRs, where
+          # secrets are not available.
+          INSTALLER_ADMIN_EMAIL: ${{ secrets.INSTALLER_ADMIN_EMAIL || 'admin@example.com' }}
+          INSTALLER_ADMIN_PASSWORD: ${{ secrets.INSTALLER_ADMIN_PASSWORD || 'admin123' }}
         run: |
           php artisan unopim:install --skip-env-check --skip-admin-creation
           php artisan migrate:fresh --seed
