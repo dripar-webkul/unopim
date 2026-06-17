@@ -51,4 +51,5 @@ return [
     CompletenessServiceProvider::class,
     AiAgentServiceProvider::class,
     AppUrlGuardServiceProvider::class,
+    \App\Providers\GridIndexServiceProvider::class,
 ];
