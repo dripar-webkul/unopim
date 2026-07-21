@@ -310,6 +310,48 @@
             </div>
         </div>
 
+        <div v-else-if="column.type === 'measurement'">
+            <div class="flex items-center justify-between">
+                <p
+                    class="text-sm font-medium leading-6 dark:text-white text-gray-800"
+                    v-text="column.label"
+                >
+                </p>
+
+                <div class="flex items-center gap-x-1.5">
+                    <p
+                        class="cursor-pointer text-xs font-medium leading-6 text-violet-700"
+                        v-if="hasAnyAppliedColumnValues(column.index)"
+                        @click="removeAppliedColumnAllValues(column.index)"
+                    >
+                        @lang('admin::app.components.datagrid.filters.custom-filters.clear-all')
+                    </p>
+
+                    <span
+                        v-if="!defaultFilterIndices.includes(column.index)"
+                        class="icon-cancel cursor-pointer text-lg text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                        @click="removeActiveFilter(column.index)"
+                        title="@lang('admin::app.components.datagrid.filters.remove-filter')"
+                    ></span>
+                </div>
+            </div>
+
+            <v-measurement-filter
+                :column="column"
+                :applied-values="getAppliedColumnValues(column.index)"
+                @apply="(value) => {
+                    let existing = applied.filters.columns.find(c => c.index === column.index);
+                    if (existing) {
+                        existing.value = [value];
+                    } else {
+                        applied.filters.columns.push({ index: column.index, value: [value] });
+                    }
+                    get();
+                }"
+                @remove="(value) => { removeAppliedColumnValue(column.index, value); get(); }"
+            ></v-measurement-filter>
+        </div>
+
         <!-- Price -->
         <div v-else-if="column.type === 'price'">
             <div class="flex items-center justify-between">
@@ -831,3 +873,5 @@
         });
     </script>
 @endpushOnce
+
+@includeIf('measurement::components.datagrid.filter')
