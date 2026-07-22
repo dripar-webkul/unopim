@@ -71,8 +71,9 @@ class MeasurementProductDataGrid extends ProductDataGrid
     /**
      * Resolve the operator and value for measurement columns.
      *
-     * The custom filter UI applies the value as [[unitCode, amount]], so we
-     * unwrap it (like the price filter) and use an exact-match operator.
+     * The filter UI applies the value as [[operator, unitCode, amount, ...]].
+     * The leading operator is optional so filters saved before comparison
+     * operators existed still resolve to an exact match.
      *
      * {@inheritdoc}
      */
@@ -80,11 +81,23 @@ class MeasurementProductDataGrid extends ProductDataGrid
     {
         $column = collect($this->columns)->first(fn ($column) => $column->index === $attribute);
 
-        if ($column && ($column->type ?? null) === 'measurement') {
-            return [FilterOperators::EQUAL, current($value)];
+        if (! $column || ($column->type ?? null) !== 'measurement') {
+            return parent::getOperatorAndValue($attribute, $value);
         }
 
-        return parent::getOperatorAndValue($attribute, $value);
+        $applied = current($value);
+
+        if (! is_array($applied)) {
+            return [FilterOperators::EQUAL, $applied];
+        }
+
+        $operator = FilterOperators::tryFrom((string) ($applied[0] ?? ''));
+
+        if (! $operator) {
+            return [FilterOperators::EQUAL, $applied];
+        }
+
+        return [$operator, array_values(array_slice($applied, 1))];
     }
 
     /**

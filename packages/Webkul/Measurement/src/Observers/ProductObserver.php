@@ -258,19 +258,12 @@ class ProductObserver
 
                 $family = $measurement->family;
 
-                $baseData = $this->helper->calculateBaseValue(
+                $scopedValues[$attributeCode] = $this->helper->buildValueStructure(
                     $value['value'],
                     $value['unit'] ?? null,
+                    $family->code,
                     $family
                 );
-
-                $scopedValues[$attributeCode] = [
-                    'unit'      => $value['unit'] ?? null,
-                    'amount'    => number_format((float) $value['value'], 4, '.', ''),
-                    'family'    => $family->code,
-                    'base_data' => number_format((float) $baseData, 6, '.', ''),
-                    'base_unit' => $family->standard_unit,
-                ];
             }
         }
     }

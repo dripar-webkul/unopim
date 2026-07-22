@@ -20,6 +20,24 @@ return [
         'sub' => 'Oduzimanje',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'Od',
+        'to'        => 'Do',
+        'operators' => [
+            'eq'            => 'Jednako',
+            'neq'           => 'Nije jednako',
+            'gt'            => 'Veće od',
+            'gte'           => 'Veće ili jednako',
+            'lt'            => 'Manje od',
+            'lte'           => 'Manje ili jednako',
+            'within_range'  => 'Između',
+            'outside_range' => 'Nije između',
+            'in_list'       => 'U',
+            'not_in_list'   => 'Nije u',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Kreiraj obitelj mjerenja',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Obriši',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalog',
+            'info'        => 'Postavke povezane s katalogom.',
+            'measurement' => [
+                'title'     => 'Mjerenje',
+                'info'      => 'Postavke povezane s mjerenjem.',
+                'precision' => [
+                    'title'          => 'Preciznost',
+                    'info'           => 'Odredite kako se pohranjuju vrijednosti mjerenja.',
+                    'strategy'       => 'Decimalna strategija',
+                    'strategy-info'  => 'Zaokruživanje zadržava najbližu vrijednost, skraćivanje odsijeca dodatne decimale.',
+                    'strategy-round' => 'Zaokruži',
+                    'strategy-trim'  => 'Skrati',
+                    'amount'         => 'Decimale iznosa',
+                    'amount-info'    => 'Broj decimalnih mjesta koji se zadržava za vrijednost koju unese korisnik.',
+                    'base'           => 'Decimale osnovne vrijednosti',
+                    'base-info'      => 'Broj decimalnih mjesta koji se zadržava za vrijednost pretvorenu u standardnu jedinicu.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Ovo polje može sadržavati samo slova, brojeve i podvlake.',
-        'label_format' => 'Ovo polje može sadržavati samo slova, brojeve, razmake i podvlake.',
+        'code_format'      => 'Ovo polje može sadržavati samo slova, brojeve i podvlake.',
+        'label_format'     => 'Ovo polje može sadržavati samo slova, brojeve, razmake i podvlake.',
+        'max_conversions'  => 'Jedinica ne može imati više od :max operacija konverzije.',
+        'max_units'        => 'Obitelj mjerenja ne može imati više od :max jedinica.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Obitelj mjernih jedinica uspješno je kreirana.',
-            'updated'               => 'Obitelj mjerenja uspješno je ažurirana.',
-            'deleted'               => 'Obitelj mjerenja uspješno je obrisana.',
-            'mass_deleted'          => 'Odabrane obitelji mjerenja uspješno su obrisane.',
-            'not_found'             => 'Obitelj mjerenja nije pronađena.',
-            'in_use'                => 'Ova obitelj mjerenja koristi se u atributima, pa se ne može izbrisati.',
-            'partially_deleted'     => 'Neke obitelji mjerenja nije bilo moguće izbrisati jer se koriste u atributima.',
-            'standard_unit_invalid' => 'Standardna jedinica mora biti jedna od navedenih jedinica.',
-            'standard_unit_locked'  => 'Standardna jedinica ne može se promijeniti dok se obitelj mjerenja koristi u atributu.',
-            'units_locked'          => 'Kodovi jedinica i operacije konverzije ne mogu se promijeniti dok se obitelj mjerenja koristi u atributu.',
-            'error'                 => 'Nešto je pošlo po zlu. Pokušajte ponovno.',
+            'created'                => 'Obitelj mjernih jedinica uspješno je kreirana.',
+            'updated'                => 'Obitelj mjerenja uspješno je ažurirana.',
+            'deleted'                => 'Obitelj mjerenja uspješno je obrisana.',
+            'mass_deleted'           => 'Odabrane obitelji mjerenja uspješno su obrisane.',
+            'not_found'              => 'Obitelj mjerenja nije pronađena.',
+            'in_use'                 => 'Ova obitelj mjerenja koristi se u atributima, pa se ne može izbrisati.',
+            'partially_deleted'      => 'Neke obitelji mjerenja nije bilo moguće izbrisati jer se koriste u atributima.',
+            'standard_unit_invalid'  => 'Standardna jedinica mora biti jedna od navedenih jedinica.',
+            'standard_unit_locked'   => 'Standardna jedinica ne može se promijeniti dok se obitelj mjerenja koristi u atributu.',
+            'units_locked'           => 'Kodovi jedinica i operacije konverzije ne mogu se promijeniti dok se obitelj mjerenja koristi u atributu.',
+            'limit_reached'          => 'Dosegnut je maksimalni broj obitelji mjerenja (:max).',
+            'error'                  => 'Nešto je pošlo po zlu. Pokušajte ponovno.',
         ],
 
         'unit' => [

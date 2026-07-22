@@ -184,17 +184,74 @@ class MeasurementHelper
             ];
         }
 
-        $family = $attributeMeasurement->family;
-        $unit = $this->resolveUnitCode($unit, $attribute);
-        $baseValue = $this->calculateBaseValue($value, $unit, $family);
+        return $this->buildValueStructure(
+            $value,
+            $this->resolveUnitCode($unit, $attribute),
+            $attributeMeasurement->family_code,
+            $attributeMeasurement->family
+        );
+    }
 
+    /**
+     * Build the stored measurement structure from an already resolved family,
+     * so callers holding a cached family avoid a repeat lookup.
+     */
+    public function buildValueStructure(mixed $value, ?string $unit, string $familyCode, $family): array
+    {
         return [
             'unit'      => $unit,
-            'amount'    => number_format((float) $value, 4, '.', ''),
-            'family'    => $attributeMeasurement->family_code,
-            'base_data' => number_format((float) $baseValue, 6, '.', ''),
+            'amount'    => $this->applyPrecision($value, 'amount'),
+            'family'    => $familyCode,
+            'base_data' => $this->applyPrecision($this->calculateBaseValue($value, $unit, $family), 'base'),
             'base_unit' => $family->standard_unit,
+            'symbol'    => $this->getUnitSymbol($unit, $family),
         ];
+    }
+
+    /**
+     * Reduce a measurement value to the configured stored precision.
+     */
+    public function applyPrecision(mixed $value, string $type): string
+    {
+        $decimals = (int) $this->getPrecisionConfig(
+            $type,
+            $type === 'base' ? 6 : 4
+        );
+
+        $value = (float) $value;
+
+        if ($this->getPrecisionConfig('strategy', 'round') === 'trim') {
+            $factor = 10 ** $decimals;
+
+            $value = ($value < 0 ? ceil($value * $factor) : floor($value * $factor)) / $factor;
+        }
+
+        return number_format($value, $decimals, '.', '');
+    }
+
+    /**
+     * Read a measurement precision setting from the admin configuration,
+     * falling back to the shipped default when it has never been saved.
+     */
+    protected function getPrecisionConfig(string $field, mixed $default): mixed
+    {
+        $value = core()->getConfigData("catalog.measurement.precision.$field");
+
+        return ($value === null || $value === '') ? $default : $value;
+    }
+
+    /**
+     * Symbol configured for a unit within its measurement family.
+     */
+    public function getUnitSymbol(?string $unitCode, $family): ?string
+    {
+        if (! $unitCode || ! $family) {
+            return null;
+        }
+
+        $unit = collect($family->units ?? [])->firstWhere('code', $unitCode);
+
+        return $unit['symbol'] ?? null;
     }
 
     /**

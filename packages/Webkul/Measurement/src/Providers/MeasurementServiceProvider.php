@@ -12,6 +12,7 @@ use Webkul\Attribute\Services\AttributeNormalizerFactory;
 use Webkul\DataTransfer\Helpers\Exporters\Product\Exporter;
 use Webkul\DataTransfer\Helpers\Importers\FieldProcessor;
 use Webkul\DataTransfer\Helpers\Importers\Product\Importer;
+use Webkul\Measurement\Console\Commands\RecalculateMeasurementValues;
 use Webkul\Measurement\Database\Seeders\MeasurementFamilySeeder;
 use Webkul\Measurement\DataGrids\MeasurementProductDataGrid;
 use Webkul\Measurement\Filter\Database\MeasurementFilter;
@@ -49,7 +50,16 @@ class MeasurementServiceProvider extends ServiceProvider
             'attribute_types'
         );
 
+        $this->mergeConfigFrom(
+            __DIR__.'/../Config/system.php',
+            'core'
+        );
+
         if ($this->app->runningInConsole()) {
+
+            $this->commands([
+                RecalculateMeasurementValues::class,
+            ]);
 
             Event::listen(CommandFinished::class, function ($event) {
 

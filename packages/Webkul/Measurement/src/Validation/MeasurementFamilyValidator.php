@@ -6,6 +6,10 @@ class MeasurementFamilyValidator
 {
     private const CODE_REGEX = 'regex:/^[A-Za-z0-9_]+$/u';
 
+    public const MAX_UNITS = 100;
+
+    public const MAX_FAMILIES = 300;
+
     private const LABEL_REGEX = 'regex:/^(?=.*[\pL])[\pL\pN\pM\s_]+$/u';
 
     /**
@@ -41,17 +45,18 @@ class MeasurementFamilyValidator
     public static function apiStoreRules(): array
     {
         return [
-            'code'           => ['required', 'string', 'max:191', self::CODE_REGEX, 'unique:measurement_families,code'],
-            'name'           => ['required', 'string', 'max:191', self::LABEL_REGEX],
-            'labels'         => ['required', 'array'],
-            'labels.en_US'   => ['required', 'string'],
-            'labels.*'       => ['nullable', 'string'],
-            'standard_unit'  => ['required', 'string', 'max:191', self::CODE_REGEX],
-            'units'          => ['required', 'array', 'min:1'],
-            'units.*.code'   => ['required', 'string', 'max:191', self::CODE_REGEX],
-            'units.*.labels' => ['required', 'array'],
-            'units.*.symbol' => ['nullable', 'string', 'max:50'],
-            'symbol'         => ['nullable', 'string', 'max:50'],
+            'code'                          => ['required', 'string', 'max:191', self::CODE_REGEX, 'unique:measurement_families,code'],
+            'name'                          => ['required', 'string', 'max:191', self::LABEL_REGEX],
+            'labels'                        => ['required', 'array'],
+            'labels.en_US'                  => ['required', 'string'],
+            'labels.*'                      => ['nullable', 'string'],
+            'standard_unit'                 => ['required', 'string', 'max:191', self::CODE_REGEX],
+            'units'                         => ['required', 'array', 'min:1', 'max:'.self::MAX_UNITS],
+            'units.*.code'                  => ['required', 'string', 'max:191', self::CODE_REGEX],
+            'units.*.labels'                => ['required', 'array'],
+            'units.*.symbol'                => ['nullable', 'string', 'max:50'],
+            'units.*.convert_from_standard' => ['nullable', 'array', 'max:'.MeasurementUnitValidator::MAX_CONVERSIONS],
+            'symbol'                        => ['nullable', 'string', 'max:50'],
         ];
     }
 
@@ -62,16 +67,17 @@ class MeasurementFamilyValidator
     public static function apiUpdateRules($id): array
     {
         return [
-            'code'           => ['sometimes', 'required', 'string', 'max:191', self::CODE_REGEX, 'unique:measurement_families,code,'.$id],
-            'name'           => ['sometimes', 'required', 'string', 'max:191', self::LABEL_REGEX],
-            'standard_unit'  => ['sometimes', 'required', 'string', 'max:191', self::CODE_REGEX],
-            'labels'         => ['sometimes', 'array'],
-            'labels.*'       => ['nullable', 'string', self::LABEL_REGEX],
-            'units'          => ['sometimes', 'array', 'min:1'],
-            'units.*.code'   => ['required_with:units', 'string', 'max:191', self::CODE_REGEX],
-            'units.*.labels' => ['sometimes', 'array'],
-            'units.*.symbol' => ['nullable', 'string', 'max:50'],
-            'symbol'         => ['nullable', 'string', 'max:50'],
+            'code'                          => ['sometimes', 'required', 'string', 'max:191', self::CODE_REGEX, 'unique:measurement_families,code,'.$id],
+            'name'                          => ['sometimes', 'required', 'string', 'max:191', self::LABEL_REGEX],
+            'standard_unit'                 => ['sometimes', 'required', 'string', 'max:191', self::CODE_REGEX],
+            'labels'                        => ['sometimes', 'array'],
+            'labels.*'                      => ['nullable', 'string', self::LABEL_REGEX],
+            'units'                         => ['sometimes', 'array', 'min:1', 'max:'.self::MAX_UNITS],
+            'units.*.code'                  => ['required_with:units', 'string', 'max:191', self::CODE_REGEX],
+            'units.*.labels'                => ['sometimes', 'array'],
+            'units.*.symbol'                => ['nullable', 'string', 'max:50'],
+            'units.*.convert_from_standard' => ['nullable', 'array', 'max:'.MeasurementUnitValidator::MAX_CONVERSIONS],
+            'symbol'                        => ['nullable', 'string', 'max:50'],
         ];
     }
 
@@ -81,13 +87,15 @@ class MeasurementFamilyValidator
     public static function messages(): array
     {
         return [
-            'code.regex'               => trans('measurement::app.validation.code_format'),
-            'standard_unit_code.regex' => trans('measurement::app.validation.code_format'),
-            'name.regex'               => trans('measurement::app.validation.label_format'),
-            'standard_unit.regex'      => trans('measurement::app.validation.code_format'),
-            'units.*.code.regex'       => trans('measurement::app.validation.code_format'),
-            'labels.*.regex'           => trans('measurement::app.validation.label_format'),
-            'unit_labels.*.regex'      => trans('measurement::app.validation.label_format'),
+            'units.max'                         => trans('measurement::app.validation.max_units', ['max' => self::MAX_UNITS]),
+            'units.*.convert_from_standard.max' => trans('measurement::app.validation.max_conversions', ['max' => MeasurementUnitValidator::MAX_CONVERSIONS]),
+            'code.regex'                        => trans('measurement::app.validation.code_format'),
+            'standard_unit_code.regex'          => trans('measurement::app.validation.code_format'),
+            'name.regex'                        => trans('measurement::app.validation.label_format'),
+            'standard_unit.regex'               => trans('measurement::app.validation.code_format'),
+            'units.*.code.regex'                => trans('measurement::app.validation.code_format'),
+            'labels.*.regex'                    => trans('measurement::app.validation.label_format'),
+            'unit_labels.*.regex'               => trans('measurement::app.validation.label_format'),
         ];
     }
 }

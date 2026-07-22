@@ -46,6 +46,15 @@ class MeasurementFamilyController extends Controller
     {
         $request->validate(MeasurementFamilyValidator::storeRules(), MeasurementFamilyValidator::messages());
 
+        if ($this->measurementFamilyRepository->count() >= MeasurementFamilyValidator::MAX_FAMILIES) {
+            return response()->json([
+                'success' => false,
+                'message' => trans('measurement::app.messages.family.limit_reached', [
+                    'max' => MeasurementFamilyValidator::MAX_FAMILIES,
+                ]),
+            ], 422);
+        }
+
         try {
             $units = [
                 [

@@ -20,6 +20,24 @@ return [
         'sub' => 'Restar',
     ],
 
+    'filter' => [
+        'operator'  => 'Operador',
+        'from'      => 'Des de',
+        'to'        => 'Fins a',
+        'operators' => [
+            'eq'            => 'Igual a',
+            'neq'           => 'Diferent de',
+            'gt'            => 'Més gran que',
+            'gte'           => 'Més gran o igual que',
+            'lt'            => 'Més petit que',
+            'lte'           => 'Més petit o igual que',
+            'within_range'  => 'Entre',
+            'outside_range' => 'No entre',
+            'in_list'       => 'En',
+            'not_in_list'   => 'No en',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Crear família de mesures',
@@ -86,9 +104,34 @@ return [
         'delete'        => 'Eliminar',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Catàleg',
+            'info'        => 'Configuracions relacionades amb el catàleg.',
+            'measurement' => [
+                'title'     => 'Mesura',
+                'info'      => 'Configuracions relacionades amb la mesura.',
+                'precision' => [
+                    'title'          => 'Precisió',
+                    'info'           => 'Controleu com s\'emmagatzemen els valors de mesura.',
+                    'strategy'       => 'Estratègia decimal',
+                    'strategy-info'  => 'Arrodonir manté el valor més proper, retallar trunca els decimals sobrants.',
+                    'strategy-round' => 'Arrodonir',
+                    'strategy-trim'  => 'Truncar',
+                    'amount'         => 'Decimals de l\'import',
+                    'amount-info'    => 'Nombre de decimals que es mantenen per al valor introduït per l\'usuari.',
+                    'base'           => 'Decimals del valor base',
+                    'base-info'      => 'Nombre de decimals que es mantenen per al valor convertit a la unitat estàndard.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Aquest camp només pot contenir lletres, números i guions baixos.',
-        'label_format' => 'Aquest camp només pot contenir lletres, números, espais i guions baixos.',
+        'code_format'      => 'Aquest camp només pot contenir lletres, números i guions baixos.',
+        'label_format'     => 'Aquest camp només pot contenir lletres, números, espais i guions baixos.',
+        'max_conversions'  => 'Una unitat no pot tenir més de :max operacions de conversió.',
+        'max_units'        => 'Una família de mesures no pot tenir més de :max unitats.',
     ],
 
     'importers' => [
@@ -101,17 +144,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'La família de mesura s\'ha creat correctament.',
-            'updated'               => 'La família de mesures s’ha actualitzat correctament.',
-            'deleted'               => 'La família de mesures s’ha eliminat correctament.',
-            'mass_deleted'          => 'Les famílies de mesures seleccionades s’han eliminat correctament.',
-            'not_found'             => 'No s’ha trobat la família de mesures.',
-            'in_use'                => 'Aquesta família de mesures s’utilitza en atributs, per la qual cosa no es pot eliminar.',
-            'partially_deleted'     => 'Algunes famílies de mesures no s’han pogut eliminar perquè s’utilitzen en atributs.',
-            'standard_unit_invalid' => 'La unitat estàndard ha de ser una de les unitats proporcionades.',
-            'standard_unit_locked'  => 'La unitat estàndard no es pot canviar mentre la família de mesures estigui utilitzada per un atribut.',
-            'units_locked'          => 'Els codis d’unitat i les operacions de conversió no es poden canviar mentre la família de mesures estigui utilitzada per un atribut.',
-            'error'                 => 'S’ha produït un error. Torneu-ho a provar.',
+            'created'                => 'La família de mesura s\'ha creat correctament.',
+            'updated'                => 'La família de mesures s’ha actualitzat correctament.',
+            'deleted'                => 'La família de mesures s’ha eliminat correctament.',
+            'mass_deleted'           => 'Les famílies de mesures seleccionades s’han eliminat correctament.',
+            'not_found'              => 'No s’ha trobat la família de mesures.',
+            'in_use'                 => 'Aquesta família de mesures s’utilitza en atributs, per la qual cosa no es pot eliminar.',
+            'partially_deleted'      => 'Algunes famílies de mesures no s’han pogut eliminar perquè s’utilitzen en atributs.',
+            'standard_unit_invalid'  => 'La unitat estàndard ha de ser una de les unitats proporcionades.',
+            'standard_unit_locked'   => 'La unitat estàndard no es pot canviar mentre la família de mesures estigui utilitzada per un atribut.',
+            'units_locked'           => 'Els codis d’unitat i les operacions de conversió no es poden canviar mentre la família de mesures estigui utilitzada per un atribut.',
+            'limit_reached'          => 'S\'ha arribat al nombre màxim de famílies de mesures (:max).',
+            'error'                  => 'S’ha produït un error. Torneu-ho a provar.',
         ],
 
         'unit' => [

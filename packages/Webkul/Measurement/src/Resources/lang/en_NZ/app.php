@@ -20,6 +20,24 @@ return [
         'sub' => 'Subtract',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'From',
+        'to'        => 'To',
+        'operators' => [
+            'eq'            => 'Equal to',
+            'neq'           => 'Not equal to',
+            'gt'            => 'Greater than',
+            'gte'           => 'Greater than or equal',
+            'lt'            => 'Less than',
+            'lte'           => 'Less than or equal',
+            'within_range'  => 'Between',
+            'outside_range' => 'Not between',
+            'in_list'       => 'In',
+            'not_in_list'   => 'Not in',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Create Measurements',
@@ -86,9 +104,34 @@ return [
         'delete'        => 'Delete',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Catalog',
+            'info'        => 'Catalog related settings.',
+            'measurement' => [
+                'title'     => 'Measurement',
+                'info'      => 'Measurement related settings.',
+                'precision' => [
+                    'title'          => 'Precision',
+                    'info'           => 'Control how measurement values are stored.',
+                    'strategy'       => 'Decimal strategy',
+                    'strategy-info'  => 'Round keeps the nearest value, trim truncates the extra decimals.',
+                    'strategy-round' => 'Round',
+                    'strategy-trim'  => 'Trim',
+                    'amount'         => 'Amount decimals',
+                    'amount-info'    => 'Decimal places kept for the value entered by the user.',
+                    'base'           => 'Base value decimals',
+                    'base-info'      => 'Decimal places kept for the value converted to the standard unit.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'This field can only contain letters, numbers, and underscores.',
-        'label_format' => 'This field can only contain letters, numbers, spaces, and underscores.',
+        'code_format'      => 'This field can only contain letters, numbers, and underscores.',
+        'label_format'     => 'This field can only contain letters, numbers, spaces, and underscores.',
+        'max_conversions'  => 'A unit cannot have more than :max conversion operations.',
+        'max_units'        => 'A measurement family cannot have more than :max units.',
     ],
 
     'importers' => [
@@ -101,17 +144,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Measurement family created successfully.',
-            'updated'               => 'Measurement Family updated successfully.',
-            'deleted'               => 'Measurement family deleted successfully.',
-            'mass_deleted'          => 'Selected measurement families deleted successfully.',
-            'not_found'             => 'Measurement family not found.',
-            'in_use'                => 'This measurement family is used in attributes, so it cannot be deleted.',
-            'partially_deleted'     => 'Some measurement families could not be deleted because they are used in attributes.',
-            'standard_unit_invalid' => 'The standard unit must be one of the provided units.',
-            'standard_unit_locked'  => 'The standard unit cannot be changed while the measurement family is used by an attribute.',
-            'units_locked'          => 'Unit codes and conversion operations cannot be changed while the measurement family is used by an attribute.',
-            'error'                 => 'Something went wrong. Please try again.',
+            'created'                => 'Measurement family created successfully.',
+            'updated'                => 'Measurement Family updated successfully.',
+            'deleted'                => 'Measurement family deleted successfully.',
+            'mass_deleted'           => 'Selected measurement families deleted successfully.',
+            'not_found'              => 'Measurement family not found.',
+            'in_use'                 => 'This measurement family is used in attributes, so it cannot be deleted.',
+            'partially_deleted'      => 'Some measurement families could not be deleted because they are used in attributes.',
+            'standard_unit_invalid'  => 'The standard unit must be one of the provided units.',
+            'standard_unit_locked'   => 'The standard unit cannot be changed while the measurement family is used by an attribute.',
+            'units_locked'           => 'Unit codes and conversion operations cannot be changed while the measurement family is used by an attribute.',
+            'limit_reached'          => 'The maximum number of measurement families (:max) has been reached.',
+            'error'                  => 'Something went wrong. Please try again.',
         ],
 
         'unit' => [

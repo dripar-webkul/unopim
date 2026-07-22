@@ -20,6 +20,24 @@ return [
         'sub' => 'Subtrahera',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'Från',
+        'to'        => 'Till',
+        'operators' => [
+            'eq'            => 'Lika med',
+            'neq'           => 'Inte lika med',
+            'gt'            => 'Större än',
+            'gte'           => 'Större än eller lika med',
+            'lt'            => 'Mindre än',
+            'lte'           => 'Mindre än eller lika med',
+            'within_range'  => 'Mellan',
+            'outside_range' => 'Inte mellan',
+            'in_list'       => 'I',
+            'not_in_list'   => 'Inte i',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Skapa mätningsfamilj',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Radera',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalog',
+            'info'        => 'Inställningar relaterade till katalogen.',
+            'measurement' => [
+                'title'     => 'Mätning',
+                'info'      => 'Inställningar relaterade till mätningen.',
+                'precision' => [
+                    'title'          => 'Precision',
+                    'info'           => 'Styr hur mätvärden lagras.',
+                    'strategy'       => 'Decimalstrategi',
+                    'strategy-info'  => 'Avrundning behåller det närmaste värdet, trimning kapar de extra decimalerna.',
+                    'strategy-round' => 'Avrunda',
+                    'strategy-trim'  => 'Trunkera',
+                    'amount'         => 'Decimaler för belopp',
+                    'amount-info'    => 'Antal decimaler som behålls för värdet som användaren anger.',
+                    'base'           => 'Decimaler för basvärde',
+                    'base-info'      => 'Antal decimaler som behålls för värdet konverterat till standardenheten.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Detta fält får endast innehålla bokstäver, siffror och understreck.',
-        'label_format' => 'Detta fält får endast innehålla bokstäver, siffror, mellanslag och understreck.',
+        'code_format'      => 'Detta fält får endast innehålla bokstäver, siffror och understreck.',
+        'label_format'     => 'Detta fält får endast innehålla bokstäver, siffror, mellanslag och understreck.',
+        'max_conversions'  => 'En enhet kan inte ha fler än :max konverteringsoperationer.',
+        'max_units'        => 'En mätningsfamilj kan inte ha fler än :max enheter.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Mätfamiljen har skapats framgångsrikt.',
-            'updated'               => 'Mätningsfamiljen uppdaterades framgångsrikt.',
-            'deleted'               => 'Mätningsfamiljen raderades framgångsrikt.',
-            'mass_deleted'          => 'Valda mätningsfamiljer raderades framgångsrikt.',
-            'not_found'             => 'Mätningsfamiljen hittades inte.',
-            'in_use'                => 'Denna mätningsfamilj används i attribut och kan därför inte raderas.',
-            'partially_deleted'     => 'Vissa mätningsfamiljer kunde inte raderas eftersom de används i attribut.',
-            'standard_unit_invalid' => 'Standardenheten måste vara en av de angivna enheterna.',
-            'standard_unit_locked'  => 'Standardenheten kan inte ändras medan mätningsfamiljen används av ett attribut.',
-            'units_locked'          => 'Enhetskoder och konverteringsoperationer kan inte ändras medan mätningsfamiljen används av ett attribut.',
-            'error'                 => 'Något gick fel. Försök igen.',
+            'created'                => 'Mätfamiljen har skapats framgångsrikt.',
+            'updated'                => 'Mätningsfamiljen uppdaterades framgångsrikt.',
+            'deleted'                => 'Mätningsfamiljen raderades framgångsrikt.',
+            'mass_deleted'           => 'Valda mätningsfamiljer raderades framgångsrikt.',
+            'not_found'              => 'Mätningsfamiljen hittades inte.',
+            'in_use'                 => 'Denna mätningsfamilj används i attribut och kan därför inte raderas.',
+            'partially_deleted'      => 'Vissa mätningsfamiljer kunde inte raderas eftersom de används i attribut.',
+            'standard_unit_invalid'  => 'Standardenheten måste vara en av de angivna enheterna.',
+            'standard_unit_locked'   => 'Standardenheten kan inte ändras medan mätningsfamiljen används av ett attribut.',
+            'units_locked'           => 'Enhetskoder och konverteringsoperationer kan inte ändras medan mätningsfamiljen används av ett attribut.',
+            'limit_reached'          => 'Det maximala antalet mätningsfamiljer (:max) har uppnåtts.',
+            'error'                  => 'Något gick fel. Försök igen.',
         ],
 
         'unit' => [

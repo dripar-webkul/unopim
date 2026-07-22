@@ -19,6 +19,24 @@ return [
         'sub' => 'Aftrekken',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'Van',
+        'to'        => 'Tot',
+        'operators' => [
+            'eq'            => 'Gelijk aan',
+            'neq'           => 'Niet gelijk aan',
+            'gt'            => 'Groter dan',
+            'gte'           => 'Groter dan of gelijk aan',
+            'lt'            => 'Kleiner dan',
+            'lte'           => 'Kleiner dan of gelijk aan',
+            'within_range'  => 'Tussen',
+            'outside_range' => 'Niet tussen',
+            'in_list'       => 'In',
+            'not_in_list'   => 'Niet in',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Maak meetfamilie',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Verwijderen',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Catalogus',
+            'info'        => 'Instellingen met betrekking tot de catalogus.',
+            'measurement' => [
+                'title'     => 'Meting',
+                'info'      => 'Instellingen met betrekking tot de meting.',
+                'precision' => [
+                    'title'          => 'Precisie',
+                    'info'           => 'Bepaal hoe metingwaarden worden opgeslagen.',
+                    'strategy'       => 'Decimale strategie',
+                    'strategy-info'  => 'Afronden behoudt de dichtstbijzijnde waarde, afkappen verwijdert de extra decimalen.',
+                    'strategy-round' => 'Afronden',
+                    'strategy-trim'  => 'Afkappen',
+                    'amount'         => 'Decimalen van bedrag',
+                    'amount-info'    => 'Aantal decimalen dat wordt behouden voor de waarde die door de gebruiker is ingevoerd.',
+                    'base'           => 'Decimalen van basiswaarde',
+                    'base-info'      => 'Aantal decimalen dat wordt behouden voor de waarde die is omgerekend naar de standaardeenheid.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Dit veld mag alleen letters, cijfers en underscores bevatten.',
-        'label_format' => 'Dit veld mag alleen letters, cijfers, spaties en underscores bevatten.',
+        'code_format'      => 'Dit veld mag alleen letters, cijfers en underscores bevatten.',
+        'label_format'     => 'Dit veld mag alleen letters, cijfers, spaties en underscores bevatten.',
+        'max_conversions'  => 'Een eenheid kan niet meer dan :max conversieoperaties hebben.',
+        'max_units'        => 'Een meetfamilie kan niet meer dan :max eenheden hebben.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Meetfamilie is succesvol aangemaakt.',
-            'updated'               => 'Meetfamilie is succesvol bijgewerkt.',
-            'deleted'               => 'Meetfamilie is succesvol verwijderd.',
-            'mass_deleted'          => 'Geselecteerde meetfamilies zijn succesvol verwijderd.',
-            'not_found'             => 'Meetfamilie niet gevonden.',
-            'in_use'                => 'Deze meetfamilie wordt gebruikt in kenmerken en kan daarom niet worden verwijderd.',
-            'partially_deleted'     => 'Sommige meetfamilies konden niet worden verwijderd omdat ze worden gebruikt in kenmerken.',
-            'standard_unit_invalid' => 'De standaardeenheid moet een van de opgegeven eenheden zijn.',
-            'standard_unit_locked'  => 'De standaardeenheid kan niet worden gewijzigd zolang de meetfamilie wordt gebruikt door een kenmerk.',
-            'units_locked'          => 'Eenheidscodes en conversieoperaties kunnen niet worden gewijzigd zolang de meetfamilie wordt gebruikt door een kenmerk.',
-            'error'                 => 'Er is iets misgegaan. Probeer het opnieuw.',
+            'created'                => 'Meetfamilie is succesvol aangemaakt.',
+            'updated'                => 'Meetfamilie is succesvol bijgewerkt.',
+            'deleted'                => 'Meetfamilie is succesvol verwijderd.',
+            'mass_deleted'           => 'Geselecteerde meetfamilies zijn succesvol verwijderd.',
+            'not_found'              => 'Meetfamilie niet gevonden.',
+            'in_use'                 => 'Deze meetfamilie wordt gebruikt in kenmerken en kan daarom niet worden verwijderd.',
+            'partially_deleted'      => 'Sommige meetfamilies konden niet worden verwijderd omdat ze worden gebruikt in kenmerken.',
+            'standard_unit_invalid'  => 'De standaardeenheid moet een van de opgegeven eenheden zijn.',
+            'standard_unit_locked'   => 'De standaardeenheid kan niet worden gewijzigd zolang de meetfamilie wordt gebruikt door een kenmerk.',
+            'units_locked'           => 'Eenheidscodes en conversieoperaties kunnen niet worden gewijzigd zolang de meetfamilie wordt gebruikt door een kenmerk.',
+            'limit_reached'          => 'Het maximale aantal meetfamilies (:max) is bereikt.',
+            'error'                  => 'Er is iets misgegaan. Probeer het opnieuw.',
         ],
 
         'unit' => [

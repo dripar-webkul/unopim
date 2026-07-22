@@ -197,10 +197,10 @@ it('rejects attribute config for a missing family (404) and a foreign unit (422)
         ->assertStatus(422);
 });
 
-it('keeps the legacy misspelled route working', function () {
+it('exposes the correctly spelled attribute-measurement route', function () {
     $family = MeasurementFamily::factory()->create();
 
     $this->withHeaders($this->headers)
-        ->getJson(route('admin.api.attribute-measurment.getUnitsByFamily', $family->code))
+        ->getJson(route('admin.api.attribute-measurement.getUnitsByFamily', $family->code))
         ->assertOk();
 });

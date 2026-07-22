@@ -20,6 +20,24 @@ return [
         'sub' => 'Subtraher',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'Fra',
+        'to'        => 'Til',
+        'operators' => [
+            'eq'            => 'Lik',
+            'neq'           => 'Ikke lik',
+            'gt'            => 'Større enn',
+            'gte'           => 'Større enn eller lik',
+            'lt'            => 'Mindre enn',
+            'lte'           => 'Mindre enn eller lik',
+            'within_range'  => 'Mellom',
+            'outside_range' => 'Ikke mellom',
+            'in_list'       => 'I',
+            'not_in_list'   => 'Ikke i',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Opprett målefamilie',
@@ -87,9 +105,34 @@ return [
         'delete'          => 'Slett',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalog',
+            'info'        => 'Innstillinger relatert til katalogen.',
+            'measurement' => [
+                'title'     => 'Måling',
+                'info'      => 'Innstillinger relatert til målingen.',
+                'precision' => [
+                    'title'          => 'Presisjon',
+                    'info'           => 'Kontroller hvordan måleverdier lagres.',
+                    'strategy'       => 'Desimalstrategi',
+                    'strategy-info'  => 'Avrunding beholder den nærmeste verdien, avkortning fjerner de ekstra desimalene.',
+                    'strategy-round' => 'Avrund',
+                    'strategy-trim'  => 'Avkort',
+                    'amount'         => 'Desimaler for beløp',
+                    'amount-info'    => 'Antall desimaler som beholdes for verdien som brukeren har angitt.',
+                    'base'           => 'Desimaler for grunnverdi',
+                    'base-info'      => 'Antall desimaler som beholdes for verdien konvertert til standardenheten.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Dette feltet kan bare inneholde bokstaver, tall og understreker.',
-        'label_format' => 'Dette feltet kan bare inneholde bokstaver, tall, mellomrom og understreker.',
+        'code_format'      => 'Dette feltet kan bare inneholde bokstaver, tall og understreker.',
+        'label_format'     => 'Dette feltet kan bare inneholde bokstaver, tall, mellomrom og understreker.',
+        'max_conversions'  => 'En enhet kan ikke ha mer enn :max konverteringsoperasjoner.',
+        'max_units'        => 'En målefamilie kan ikke ha mer enn :max enheter.',
     ],
 
     'importers' => [
@@ -102,17 +145,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Målefamilien ble opprettet.',
-            'updated'               => 'Målefamilien ble oppdatert.',
-            'deleted'               => 'Målefamilien ble slettet.',
-            'mass_deleted'          => 'De valgte målefamiliene ble slettet.',
-            'not_found'             => 'Målefamilie ikke funnet.',
-            'in_use'                => 'Denne målefamilien brukes i attributter og kan derfor ikke slettes.',
-            'partially_deleted'     => 'Enkelte målefamilier kunne ikke slettes fordi de brukes i attributter.',
-            'standard_unit_invalid' => 'Standardenheten må være en av de oppgitte enhetene.',
-            'standard_unit_locked'  => 'Standardenheten kan ikke endres mens målefamilien brukes av et attributt.',
-            'units_locked'          => 'Enhetskoder og konverteringsoperasjoner kan ikke endres mens målefamilien brukes av et attributt.',
-            'error'                 => 'Noe gikk galt. Vennligst prøv igjen.',
+            'created'                => 'Målefamilien ble opprettet.',
+            'updated'                => 'Målefamilien ble oppdatert.',
+            'deleted'                => 'Målefamilien ble slettet.',
+            'mass_deleted'           => 'De valgte målefamiliene ble slettet.',
+            'not_found'              => 'Målefamilie ikke funnet.',
+            'in_use'                 => 'Denne målefamilien brukes i attributter og kan derfor ikke slettes.',
+            'partially_deleted'      => 'Enkelte målefamilier kunne ikke slettes fordi de brukes i attributter.',
+            'standard_unit_invalid'  => 'Standardenheten må være en av de oppgitte enhetene.',
+            'standard_unit_locked'   => 'Standardenheten kan ikke endres mens målefamilien brukes av et attributt.',
+            'units_locked'           => 'Enhetskoder og konverteringsoperasjoner kan ikke endres mens målefamilien brukes av et attributt.',
+            'limit_reached'          => 'Maksimalt antall målefamilier (:max) er nådd.',
+            'error'                  => 'Noe gikk galt. Vennligst prøv igjen.',
         ],
 
         'unit' => [

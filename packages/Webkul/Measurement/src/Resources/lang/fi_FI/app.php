@@ -20,6 +20,24 @@ return [
         'sub' => 'Vähennä',
     ],
 
+    'filter' => [
+        'operator'  => 'Operaattori',
+        'from'      => 'Alkaen',
+        'to'        => 'Asti',
+        'operators' => [
+            'eq'            => 'Yhtä suuri kuin',
+            'neq'           => 'Eri suuri kuin',
+            'gt'            => 'Suurempi kuin',
+            'gte'           => 'Suurempi tai yhtä suuri kuin',
+            'lt'            => 'Pienempi kuin',
+            'lte'           => 'Pienempi tai yhtä suuri kuin',
+            'within_range'  => 'Välillä',
+            'outside_range' => 'Ei välillä',
+            'in_list'       => 'Sisältyy',
+            'not_in_list'   => 'Ei sisälly',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Luo mittausperhe',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Poista',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalogi',
+            'info'        => 'Katalogiin liittyvät asetukset.',
+            'measurement' => [
+                'title'     => 'Mittaus',
+                'info'      => 'Mittaukseen liittyvät asetukset.',
+                'precision' => [
+                    'title'          => 'Tarkkuus',
+                    'info'           => 'Hallitse, miten mittausarvot tallennetaan.',
+                    'strategy'       => 'Desimaalistrategia',
+                    'strategy-info'  => 'Pyöristys säilyttää lähimmän arvon, katkaisu poistaa ylimääräiset desimaalit.',
+                    'strategy-round' => 'Pyöristä',
+                    'strategy-trim'  => 'Katkaise',
+                    'amount'         => 'Määrän desimaalit',
+                    'amount-info'    => 'Käyttäjän syöttämälle arvolle säilytettävien desimaalien määrä.',
+                    'base'           => 'Perusarvon desimaalit',
+                    'base-info'      => 'Vakioyksikköön muunnetulle arvolle säilytettävien desimaalien määrä.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Tämä kenttä voi sisältää vain kirjaimia, numeroita ja alaviivoja.',
-        'label_format' => 'Tämä kenttä voi sisältää vain kirjaimia, numeroita, välilyöntejä ja alaviivoja.',
+        'code_format'      => 'Tämä kenttä voi sisältää vain kirjaimia, numeroita ja alaviivoja.',
+        'label_format'     => 'Tämä kenttä voi sisältää vain kirjaimia, numeroita, välilyöntejä ja alaviivoja.',
+        'max_conversions'  => 'Yksiköllä ei voi olla enempää kuin :max muunnosoperaatiota.',
+        'max_units'        => 'Mittausperheellä ei voi olla enempää kuin :max yksikköä.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Mittausperhe luotiin onnistuneesti.',
-            'updated'               => 'Mittausperhe päivitettiin onnistuneesti.',
-            'deleted'               => 'Mittausperhe poistettiin onnistuneesti.',
-            'mass_deleted'          => 'Valitut mittausperheet poistettiin onnistuneesti.',
-            'not_found'             => 'Mittausperhettä ei löytynyt.',
-            'in_use'                => 'Tätä mittausperhettä käytetään attribuuteissa, joten sitä ei voi poistaa.',
-            'partially_deleted'     => 'Joitakin mittausperheitä ei voitu poistaa, koska niitä käytetään attribuuteissa.',
-            'standard_unit_invalid' => 'Vakioyksikön tulee olla yksi annetuista yksiköistä.',
-            'standard_unit_locked'  => 'Vakioyksikköä ei voi muuttaa, kun mittausperhettä käytetään attribuutissa.',
-            'units_locked'          => 'Yksikkökoodeja ja muunnosoperaatioita ei voi muuttaa, kun mittausperhettä käytetään attribuutissa.',
-            'error'                 => 'Jokin meni pieleen. Yritä uudelleen.',
+            'created'                => 'Mittausperhe luotiin onnistuneesti.',
+            'updated'                => 'Mittausperhe päivitettiin onnistuneesti.',
+            'deleted'                => 'Mittausperhe poistettiin onnistuneesti.',
+            'mass_deleted'           => 'Valitut mittausperheet poistettiin onnistuneesti.',
+            'not_found'              => 'Mittausperhettä ei löytynyt.',
+            'in_use'                 => 'Tätä mittausperhettä käytetään attribuuteissa, joten sitä ei voi poistaa.',
+            'partially_deleted'      => 'Joitakin mittausperheitä ei voitu poistaa, koska niitä käytetään attribuuteissa.',
+            'standard_unit_invalid'  => 'Vakioyksikön tulee olla yksi annetuista yksiköistä.',
+            'standard_unit_locked'   => 'Vakioyksikköä ei voi muuttaa, kun mittausperhettä käytetään attribuutissa.',
+            'units_locked'           => 'Yksikkökoodeja ja muunnosoperaatioita ei voi muuttaa, kun mittausperhettä käytetään attribuutissa.',
+            'limit_reached'          => 'Mittausperheiden enimmäismäärä (:max) on saavutettu.',
+            'error'                  => 'Jokin meni pieleen. Yritä uudelleen.',
         ],
 
         'unit' => [

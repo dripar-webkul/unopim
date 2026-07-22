@@ -20,6 +20,24 @@ return [
         'sub' => 'Ibawas',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'Mula',
+        'to'        => 'Hanggang',
+        'operators' => [
+            'eq'            => 'Katumbas ng',
+            'neq'           => 'Hindi katumbas ng',
+            'gt'            => 'Mas malaki kaysa',
+            'gte'           => 'Mas malaki o katumbas ng',
+            'lt'            => 'Mas maliit kaysa',
+            'lte'           => 'Mas maliit o katumbas ng',
+            'within_range'  => 'Sa pagitan ng',
+            'outside_range' => 'Hindi sa pagitan ng',
+            'in_list'       => 'Kasama',
+            'not_in_list'   => 'Hindi kasama',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Gumawa ng Pamilya ng Sukat',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Tanggalin',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalogo',
+            'info'        => 'Mga setting na may kaugnayan sa katalogo.',
+            'measurement' => [
+                'title'     => 'Sukat',
+                'info'      => 'Mga setting na may kaugnayan sa sukat.',
+                'precision' => [
+                    'title'          => 'Katumpakan',
+                    'info'           => 'Kontrolin kung paano naka-imbak ang mga halaga ng sukat.',
+                    'strategy'       => 'Estratehiya ng desimal',
+                    'strategy-info'  => 'Ang pag-round ay nagpapanatili ng pinakamalapit na halaga, ang pag-trim ay pinuputol ang labis na mga desimal.',
+                    'strategy-round' => 'I-round',
+                    'strategy-trim'  => 'I-trim',
+                    'amount'         => 'Mga desimal ng halaga',
+                    'amount-info'    => 'Bilang ng mga decimal na pinapanatili para sa halagang inilagay ng user.',
+                    'base'           => 'Mga desimal ng batayang halaga',
+                    'base-info'      => 'Bilang ng mga decimal na pinapanatili para sa halagang na-convert sa karaniwang yunit.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Ang field na ito ay maaari lamang maglaman ng mga titik, numero, at underscore.',
-        'label_format' => 'Ang field na ito ay maaari lamang maglaman ng mga titik, numero, espasyo, at underscore.',
+        'code_format'      => 'Ang field na ito ay maaari lamang maglaman ng mga titik, numero, at underscore.',
+        'label_format'     => 'Ang field na ito ay maaari lamang maglaman ng mga titik, numero, espasyo, at underscore.',
+        'max_conversions'  => 'Ang isang yunit ay hindi maaaring magkaroon ng higit sa :max na operasyon ng pag-convert.',
+        'max_units'        => 'Ang isang pamilya ng sukat ay hindi maaaring magkaroon ng higit sa :max na yunit.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Matagumpay na nagawa ang pamilya ng sukat.',
-            'updated'               => 'Matagumpay na na-update ang Pamilya ng Sukat.',
-            'deleted'               => 'Matagumpay na natanggal ang pamilya ng sukat.',
-            'mass_deleted'          => 'Matagumpay na natanggal ang mga napiling pamilya ng sukat.',
-            'not_found'             => 'Hindi natagpuan ang pamilya ng sukat.',
-            'in_use'                => 'Ginagamit ang pamilyang ito ng sukat sa mga katangian, kaya hindi ito matatanggal.',
-            'partially_deleted'     => 'Hindi natanggal ang ilang pamilya ng sukat dahil ginagamit ang mga ito sa mga katangian.',
-            'standard_unit_invalid' => 'Ang karaniwang yunit ay dapat isa sa mga ibinigay na yunit.',
-            'standard_unit_locked'  => 'Hindi mababago ang karaniwang yunit habang ginagamit ang pamilya ng sukat ng isang katangian.',
-            'units_locked'          => 'Hindi mababago ang mga kodigo ng yunit at mga operasyon ng pag-convert habang ginagamit ang pamilya ng sukat ng isang katangian.',
-            'error'                 => 'May nangyaring hindi inaasahan. Pakisubukang muli.',
+            'created'                => 'Matagumpay na nagawa ang pamilya ng sukat.',
+            'updated'                => 'Matagumpay na na-update ang Pamilya ng Sukat.',
+            'deleted'                => 'Matagumpay na natanggal ang pamilya ng sukat.',
+            'mass_deleted'           => 'Matagumpay na natanggal ang mga napiling pamilya ng sukat.',
+            'not_found'              => 'Hindi natagpuan ang pamilya ng sukat.',
+            'in_use'                 => 'Ginagamit ang pamilyang ito ng sukat sa mga katangian, kaya hindi ito matatanggal.',
+            'partially_deleted'      => 'Hindi natanggal ang ilang pamilya ng sukat dahil ginagamit ang mga ito sa mga katangian.',
+            'standard_unit_invalid'  => 'Ang karaniwang yunit ay dapat isa sa mga ibinigay na yunit.',
+            'standard_unit_locked'   => 'Hindi mababago ang karaniwang yunit habang ginagamit ang pamilya ng sukat ng isang katangian.',
+            'units_locked'           => 'Hindi mababago ang mga kodigo ng yunit at mga operasyon ng pag-convert habang ginagamit ang pamilya ng sukat ng isang katangian.',
+            'limit_reached'          => 'Naabot na ang maximum na bilang ng mga pamilya ng sukat (:max).',
+            'error'                  => 'May nangyaring hindi inaasahan. Pakisubukang muli.',
         ],
 
         'unit' => [

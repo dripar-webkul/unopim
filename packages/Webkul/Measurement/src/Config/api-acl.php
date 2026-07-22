@@ -51,16 +51,4 @@ return [
         'route' => 'admin.api.attribute-measurement.update',
         'sort'  => 2,
     ],
-
-    [
-        'key'   => 'api.catalog.measurements.create',
-        'name'  => 'admin::app.acl.create',
-        'route' => 'admin.api.attribute-measurment.store',
-        'sort'  => 1,
-    ], [
-        'key'   => 'api.catalog.measurements.edit',
-        'name'  => 'admin::app.acl.edit',
-        'route' => 'admin.api.attribute-measurment.update',
-        'sort'  => 2,
-    ],
 ];

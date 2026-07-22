@@ -73,6 +73,15 @@ class MeasurementFamilyApiController extends Controller
     {
         $request->validate(MeasurementFamilyValidator::apiStoreRules(), MeasurementFamilyValidator::messages());
 
+        if ($this->repository->count() >= MeasurementFamilyValidator::MAX_FAMILIES) {
+            return response()->json([
+                'success' => false,
+                'message' => trans('measurement::app.messages.family.limit_reached', [
+                    'max' => MeasurementFamilyValidator::MAX_FAMILIES,
+                ]),
+            ], 422);
+        }
+
         $data = $request->all();
 
         $unitCodes = array_column($data['units'], 'code');

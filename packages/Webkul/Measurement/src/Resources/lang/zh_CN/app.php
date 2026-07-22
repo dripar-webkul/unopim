@@ -20,6 +20,24 @@ return [
         'sub' => '减',
     ],
 
+    'filter' => [
+        'operator'  => '运算符',
+        'from'      => '从',
+        'to'        => '到',
+        'operators' => [
+            'eq'            => '等于',
+            'neq'           => '不等于',
+            'gt'            => '大于',
+            'gte'           => '大于或等于',
+            'lt'            => '小于',
+            'lte'           => '小于或等于',
+            'within_range'  => '介于',
+            'outside_range' => '不介于',
+            'in_list'       => '属于',
+            'not_in_list'   => '不属于',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => '创建计量单位组',
@@ -85,9 +103,34 @@ return [
         'delete'        => '删除',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => '目录',
+            'info'        => '目录相关设置。',
+            'measurement' => [
+                'title'     => '计量',
+                'info'      => '计量相关设置。',
+                'precision' => [
+                    'title'          => '精度',
+                    'info'           => '控制计量值的存储方式。',
+                    'strategy'       => '小数策略',
+                    'strategy-info'  => '四舍五入保留最接近的值，截断会截去多余的小数。',
+                    'strategy-round' => '四舍五入',
+                    'strategy-trim'  => '截断',
+                    'amount'         => '数值小数位数',
+                    'amount-info'    => '为用户输入的值保留的小数位数。',
+                    'base'           => '基准值小数位数',
+                    'base-info'      => '转换为标准单位后保留的小数位数。',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => '该字段只能包含字母、数字和下划线。',
-        'label_format' => '该字段只能包含字母、数字、空格和下划线。',
+        'code_format'      => '该字段只能包含字母、数字和下划线。',
+        'label_format'     => '该字段只能包含字母、数字、空格和下划线。',
+        'max_conversions'  => '一个单位不能拥有超过 :max 个转换操作。',
+        'max_units'        => '一个计量单位组不能拥有超过 :max 个单位。',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => '测量系列已成功创建。',
-            'updated'               => '计量单位组已成功更新。',
-            'deleted'               => '计量单位组已成功删除。',
-            'mass_deleted'          => '所选计量单位组已成功删除。',
-            'not_found'             => '未找到计量单位组。',
-            'in_use'                => '该计量单位组已被属性使用，无法删除。',
-            'partially_deleted'     => '部分计量单位组因被属性使用而无法删除。',
-            'standard_unit_invalid' => '标准单位必须是所提供单位之一。',
-            'standard_unit_locked'  => '当该计量单位组被属性使用时，无法更改标准单位。',
-            'units_locked'          => '当该计量单位组被属性使用时，无法更改单位代码和转换操作。',
-            'error'                 => '出现错误，请重试。',
+            'created'                => '测量系列已成功创建。',
+            'updated'                => '计量单位组已成功更新。',
+            'deleted'                => '计量单位组已成功删除。',
+            'mass_deleted'           => '所选计量单位组已成功删除。',
+            'not_found'              => '未找到计量单位组。',
+            'in_use'                 => '该计量单位组已被属性使用，无法删除。',
+            'partially_deleted'      => '部分计量单位组因被属性使用而无法删除。',
+            'standard_unit_invalid'  => '标准单位必须是所提供单位之一。',
+            'standard_unit_locked'   => '当该计量单位组被属性使用时，无法更改标准单位。',
+            'units_locked'           => '当该计量单位组被属性使用时，无法更改单位代码和转换操作。',
+            'limit_reached'          => '计量单位组的最大数量 (:max) 已达到。',
+            'error'                  => '出现错误，请重试。',
         ],
 
         'unit' => [

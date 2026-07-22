@@ -68,3 +68,26 @@ it('injects the measurement panel into the attribute edit page', function () {
 it('renders the measurement family index page', function () {
     $this->get(route('admin.measurement.families.index'))->assertOk();
 });
+
+it('renders the comparison operator dropdown in the measurement filter', function () {
+    measurementAttribute();
+
+    $this->get(route('admin.catalog.products.index'))
+        ->assertOk()
+        ->assertSee('operatorOptions', false)
+        ->assertSee("value: 'within_range'", false)
+        ->assertSee("value: 'gte'", false)
+        ->assertSee('isRange', false);
+});
+
+it('shows the measurement precision settings on the admin configuration screen', function () {
+    $response = $this->get(route('admin.configuration.edit', ['slug' => 'catalog', 'slug2' => 'measurement']));
+
+    $response->assertOk()
+        ->assertSee(trans('measurement::app.config.catalog.measurement.precision.strategy-round'), false)
+        ->assertSee(trans('measurement::app.config.catalog.measurement.precision.strategy-trim'), false)
+        ->assertSee(trans('measurement::app.config.catalog.measurement.precision.title'), false)
+        ->assertSee('strategy', false)
+        ->assertSee('amount', false)
+        ->assertSee('base', false);
+});

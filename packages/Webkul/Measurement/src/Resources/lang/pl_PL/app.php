@@ -19,6 +19,24 @@ return [
         'sub' => 'Odejmowanie',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'Od',
+        'to'        => 'Do',
+        'operators' => [
+            'eq'            => 'Równe',
+            'neq'           => 'Różne od',
+            'gt'            => 'Większe niż',
+            'gte'           => 'Większe lub równe',
+            'lt'            => 'Mniejsze niż',
+            'lte'           => 'Mniejsze lub równe',
+            'within_range'  => 'Pomiędzy',
+            'outside_range' => 'Poza zakresem',
+            'in_list'       => 'W',
+            'not_in_list'   => 'Nie w',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Utwórz rodzinę jednostek',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Usuń',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalog',
+            'info'        => 'Ustawienia związane z katalogiem.',
+            'measurement' => [
+                'title'     => 'Pomiar',
+                'info'      => 'Ustawienia związane z pomiarem.',
+                'precision' => [
+                    'title'          => 'Precyzja',
+                    'info'           => 'Kontroluj sposób przechowywania wartości pomiarowych.',
+                    'strategy'       => 'Strategia dziesiętna',
+                    'strategy-info'  => 'Zaokrąglanie zachowuje najbliższą wartość, obcinanie usuwa dodatkowe miejsca dziesiętne.',
+                    'strategy-round' => 'Zaokrąglij',
+                    'strategy-trim'  => 'Obetnij',
+                    'amount'         => 'Miejsca dziesiętne kwoty',
+                    'amount-info'    => 'Liczba miejsc dziesiętnych zachowywana dla wartości wprowadzonej przez użytkownika.',
+                    'base'           => 'Miejsca dziesiętne wartości bazowej',
+                    'base-info'      => 'Liczba miejsc dziesiętnych zachowywana dla wartości przeliczonej na jednostkę standardową.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'To pole może zawierać tylko litery, cyfry i podkreślenia.',
-        'label_format' => 'To pole może zawierać tylko litery, cyfry, spacje i podkreślenia.',
+        'code_format'      => 'To pole może zawierać tylko litery, cyfry i podkreślenia.',
+        'label_format'     => 'To pole może zawierać tylko litery, cyfry, spacje i podkreślenia.',
+        'max_conversions'  => 'Jednostka nie może mieć więcej niż :max operacji konwersji.',
+        'max_units'        => 'Rodzina jednostek nie może mieć więcej niż :max jednostek.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Rodzina pomiarów została pomyślnie utworzona.',
-            'updated'               => 'Rodzina jednostek została pomyślnie zaktualizowana.',
-            'deleted'               => 'Rodzina jednostek została pomyślnie usunięta.',
-            'mass_deleted'          => 'Wybrane rodziny jednostek zostały pomyślnie usunięte.',
-            'not_found'             => 'Nie znaleziono rodziny jednostek.',
-            'in_use'                => 'Ta rodzina jednostek jest używana w atrybutach, więc nie można jej usunąć.',
-            'partially_deleted'     => 'Niektórych rodzin jednostek nie można było usunąć, ponieważ są używane w atrybutach.',
-            'standard_unit_invalid' => 'Jednostka standardowa musi być jedną z podanych jednostek.',
-            'standard_unit_locked'  => 'Jednostki standardowej nie można zmienić, gdy rodzina jednostek jest używana przez atrybut.',
-            'units_locked'          => 'Kodów jednostek i operacji konwersji nie można zmienić, gdy rodzina jednostek jest używana przez atrybut.',
-            'error'                 => 'Coś poszło nie tak. Spróbuj ponownie.',
+            'created'                => 'Rodzina pomiarów została pomyślnie utworzona.',
+            'updated'                => 'Rodzina jednostek została pomyślnie zaktualizowana.',
+            'deleted'                => 'Rodzina jednostek została pomyślnie usunięta.',
+            'mass_deleted'           => 'Wybrane rodziny jednostek zostały pomyślnie usunięte.',
+            'not_found'              => 'Nie znaleziono rodziny jednostek.',
+            'in_use'                 => 'Ta rodzina jednostek jest używana w atrybutach, więc nie można jej usunąć.',
+            'partially_deleted'      => 'Niektórych rodzin jednostek nie można było usunąć, ponieważ są używane w atrybutach.',
+            'standard_unit_invalid'  => 'Jednostka standardowa musi być jedną z podanych jednostek.',
+            'standard_unit_locked'   => 'Jednostki standardowej nie można zmienić, gdy rodzina jednostek jest używana przez atrybut.',
+            'units_locked'           => 'Kodów jednostek i operacji konwersji nie można zmienić, gdy rodzina jednostek jest używana przez atrybut.',
+            'limit_reached'          => 'Osiągnięto maksymalną liczbę rodzin jednostek (:max).',
+            'error'                  => 'Coś poszło nie tak. Spróbuj ponownie.',
         ],
 
         'unit' => [

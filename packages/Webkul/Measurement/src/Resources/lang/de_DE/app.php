@@ -20,6 +20,24 @@ return [
         'sub' => 'Subtrahieren',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'Von',
+        'to'        => 'Bis',
+        'operators' => [
+            'eq'            => 'Gleich',
+            'neq'           => 'Ungleich',
+            'gt'            => 'Größer als',
+            'gte'           => 'Größer als oder gleich',
+            'lt'            => 'Kleiner als',
+            'lte'           => 'Kleiner als oder gleich',
+            'within_range'  => 'Zwischen',
+            'outside_range' => 'Nicht zwischen',
+            'in_list'       => 'In',
+            'not_in_list'   => 'Nicht in',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Messfamilie erstellen',
@@ -86,9 +104,34 @@ return [
         'delete'        => 'Löschen',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalog',
+            'info'        => 'Einstellungen im Zusammenhang mit dem Katalog.',
+            'measurement' => [
+                'title'     => 'Messung',
+                'info'      => 'Einstellungen im Zusammenhang mit der Messung.',
+                'precision' => [
+                    'title'          => 'Genauigkeit',
+                    'info'           => 'Legen Sie fest, wie Messwerte gespeichert werden.',
+                    'strategy'       => 'Dezimalstrategie',
+                    'strategy-info'  => 'Runden behält den nächstgelegenen Wert bei, Kürzen schneidet die zusätzlichen Dezimalstellen ab.',
+                    'strategy-round' => 'Runden',
+                    'strategy-trim'  => 'Abschneiden',
+                    'amount'         => 'Dezimalstellen für Betrag',
+                    'amount-info'    => 'Anzahl der Dezimalstellen, die für den vom Benutzer eingegebenen Wert beibehalten werden.',
+                    'base'           => 'Dezimalstellen für Basiswert',
+                    'base-info'      => 'Anzahl der Dezimalstellen, die für den in die Standardeinheit umgerechneten Wert beibehalten werden.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Dieses Feld darf nur Buchstaben, Zahlen und Unterstriche enthalten.',
-        'label_format' => 'Dieses Feld darf nur Buchstaben, Zahlen, Leerzeichen und Unterstriche enthalten.',
+        'code_format'      => 'Dieses Feld darf nur Buchstaben, Zahlen und Unterstriche enthalten.',
+        'label_format'     => 'Dieses Feld darf nur Buchstaben, Zahlen, Leerzeichen und Unterstriche enthalten.',
+        'max_conversions'  => 'Eine Einheit darf nicht mehr als :max Konvertierungsoperationen haben.',
+        'max_units'        => 'Eine Messfamilie darf nicht mehr als :max Einheiten haben.',
     ],
 
     'importers' => [
@@ -101,17 +144,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Messfamilie wurde erfolgreich erstellt.',
-            'updated'               => 'Die Messfamilie wurde erfolgreich aktualisiert.',
-            'deleted'               => 'Die Messfamilie wurde erfolgreich gelöscht.',
-            'mass_deleted'          => 'Die ausgewählten Messfamilien wurden erfolgreich gelöscht.',
-            'not_found'             => 'Messfamilie nicht gefunden.',
-            'in_use'                => 'Diese Messfamilie wird in Attributen verwendet und kann daher nicht gelöscht werden.',
-            'partially_deleted'     => 'Einige Messfamilien konnten nicht gelöscht werden, da sie in Attributen verwendet werden.',
-            'standard_unit_invalid' => 'Die Standardeinheit muss eine der angegebenen Einheiten sein.',
-            'standard_unit_locked'  => 'Die Standardeinheit kann nicht geändert werden, solange die Messfamilie von einem Attribut verwendet wird.',
-            'units_locked'          => 'Einheitencodes und Konvertierungsoperationen können nicht geändert werden, solange die Messfamilie von einem Attribut verwendet wird.',
-            'error'                 => 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
+            'created'                => 'Messfamilie wurde erfolgreich erstellt.',
+            'updated'                => 'Die Messfamilie wurde erfolgreich aktualisiert.',
+            'deleted'                => 'Die Messfamilie wurde erfolgreich gelöscht.',
+            'mass_deleted'           => 'Die ausgewählten Messfamilien wurden erfolgreich gelöscht.',
+            'not_found'              => 'Messfamilie nicht gefunden.',
+            'in_use'                 => 'Diese Messfamilie wird in Attributen verwendet und kann daher nicht gelöscht werden.',
+            'partially_deleted'      => 'Einige Messfamilien konnten nicht gelöscht werden, da sie in Attributen verwendet werden.',
+            'standard_unit_invalid'  => 'Die Standardeinheit muss eine der angegebenen Einheiten sein.',
+            'standard_unit_locked'   => 'Die Standardeinheit kann nicht geändert werden, solange die Messfamilie von einem Attribut verwendet wird.',
+            'units_locked'           => 'Einheitencodes und Konvertierungsoperationen können nicht geändert werden, solange die Messfamilie von einem Attribut verwendet wird.',
+            'limit_reached'          => 'Die maximale Anzahl an Messfamilien (:max) wurde erreicht.',
+            'error'                  => 'Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.',
         ],
 
         'unit' => [

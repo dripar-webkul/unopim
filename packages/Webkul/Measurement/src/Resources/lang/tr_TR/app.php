@@ -20,6 +20,24 @@ return [
         'sub' => 'Çıkar',
     ],
 
+    'filter' => [
+        'operator'  => 'Operatör',
+        'from'      => 'Başlangıç',
+        'to'        => 'Bitiş',
+        'operators' => [
+            'eq'            => 'Eşit',
+            'neq'           => 'Eşit değil',
+            'gt'            => 'Büyüktür',
+            'gte'           => 'Büyük veya eşit',
+            'lt'            => 'Küçüktür',
+            'lte'           => 'Küçük veya eşit',
+            'within_range'  => 'Arasında',
+            'outside_range' => 'Arasında değil',
+            'in_list'       => 'İçinde',
+            'not_in_list'   => 'İçinde değil',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Ölçüm Ailesi Oluştur',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Sil',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalog',
+            'info'        => 'Katalogla ilgili ayarlar.',
+            'measurement' => [
+                'title'     => 'Ölçüm',
+                'info'      => 'Ölçümle ilgili ayarlar.',
+                'precision' => [
+                    'title'          => 'Hassasiyet',
+                    'info'           => 'Ölçüm değerlerinin nasıl saklanacağını kontrol edin.',
+                    'strategy'       => 'Ondalık stratejisi',
+                    'strategy-info'  => 'Yuvarlama en yakın değeri korur, kırpma ise fazla ondalıkları keser.',
+                    'strategy-round' => 'Yuvarla',
+                    'strategy-trim'  => 'Kırp',
+                    'amount'         => 'Tutar ondalıkları',
+                    'amount-info'    => 'Kullanıcının girdiği değer için korunan ondalık basamak sayısı.',
+                    'base'           => 'Temel değer ondalıkları',
+                    'base-info'      => 'Standart birime dönüştürülen değer için korunan ondalık basamak sayısı.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Bu alan yalnızca harf, rakam ve alt çizgi içerebilir.',
-        'label_format' => 'Bu alan yalnızca harf, rakam, boşluk ve alt çizgi içerebilir.',
+        'code_format'      => 'Bu alan yalnızca harf, rakam ve alt çizgi içerebilir.',
+        'label_format'     => 'Bu alan yalnızca harf, rakam, boşluk ve alt çizgi içerebilir.',
+        'max_conversions'  => 'Bir birim :max taneden fazla dönüştürme işlemine sahip olamaz.',
+        'max_units'        => 'Bir ölçüm ailesi :max taneden fazla birime sahip olamaz.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Ölçüm ailesi başarıyla oluşturuldu.',
-            'updated'               => 'Ölçüm ailesi başarıyla güncellendi.',
-            'deleted'               => 'Ölçüm ailesi başarıyla silindi.',
-            'mass_deleted'          => 'Seçilen ölçüm aileleri başarıyla silindi.',
-            'not_found'             => 'Ölçüm ailesi bulunamadı.',
-            'in_use'                => 'Bu ölçüm ailesi özniteliklerde kullanıldığından silinemez.',
-            'partially_deleted'     => 'Bazı ölçüm aileleri özniteliklerde kullanıldığı için silinemedi.',
-            'standard_unit_invalid' => 'Standart birim, sağlanan birimlerden biri olmalıdır.',
-            'standard_unit_locked'  => 'Ölçüm ailesi bir öznitelik tarafından kullanılırken standart birim değiştirilemez.',
-            'units_locked'          => 'Ölçüm ailesi bir öznitelik tarafından kullanılırken birim kodları ve dönüştürme işlemleri değiştirilemez.',
-            'error'                 => 'Bir şeyler yanlış gitti. Lütfen tekrar deneyin.',
+            'created'                => 'Ölçüm ailesi başarıyla oluşturuldu.',
+            'updated'                => 'Ölçüm ailesi başarıyla güncellendi.',
+            'deleted'                => 'Ölçüm ailesi başarıyla silindi.',
+            'mass_deleted'           => 'Seçilen ölçüm aileleri başarıyla silindi.',
+            'not_found'              => 'Ölçüm ailesi bulunamadı.',
+            'in_use'                 => 'Bu ölçüm ailesi özniteliklerde kullanıldığından silinemez.',
+            'partially_deleted'      => 'Bazı ölçüm aileleri özniteliklerde kullanıldığı için silinemedi.',
+            'standard_unit_invalid'  => 'Standart birim, sağlanan birimlerden biri olmalıdır.',
+            'standard_unit_locked'   => 'Ölçüm ailesi bir öznitelik tarafından kullanılırken standart birim değiştirilemez.',
+            'units_locked'           => 'Ölçüm ailesi bir öznitelik tarafından kullanılırken birim kodları ve dönüştürme işlemleri değiştirilemez.',
+            'limit_reached'          => 'Maksimum ölçüm ailesi sayısına (:max) ulaşıldı.',
+            'error'                  => 'Bir şeyler yanlış gitti. Lütfen tekrar deneyin.',
         ],
 
         'unit' => [

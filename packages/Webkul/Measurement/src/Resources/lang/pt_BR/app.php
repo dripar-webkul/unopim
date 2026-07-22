@@ -20,6 +20,24 @@ return [
         'sub' => 'Subtrair',
     ],
 
+    'filter' => [
+        'operator'  => 'Operador',
+        'from'      => 'De',
+        'to'        => 'Até',
+        'operators' => [
+            'eq'            => 'Igual a',
+            'neq'           => 'Diferente de',
+            'gt'            => 'Maior que',
+            'gte'           => 'Maior ou igual a',
+            'lt'            => 'Menor que',
+            'lte'           => 'Menor ou igual a',
+            'within_range'  => 'Entre',
+            'outside_range' => 'Não entre',
+            'in_list'       => 'Em',
+            'not_in_list'   => 'Não em',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Criar Família de Medição',
@@ -87,9 +105,34 @@ return [
         'delete'          => 'Excluir',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Catálogo',
+            'info'        => 'Configurações relacionadas ao catálogo.',
+            'measurement' => [
+                'title'     => 'Medição',
+                'info'      => 'Configurações relacionadas à medição.',
+                'precision' => [
+                    'title'          => 'Precisão',
+                    'info'           => 'Controle como os valores de medição são armazenados.',
+                    'strategy'       => 'Estratégia decimal',
+                    'strategy-info'  => 'Arredondar mantém o valor mais próximo, truncar remove as casas decimais extras.',
+                    'strategy-round' => 'Arredondar',
+                    'strategy-trim'  => 'Truncar',
+                    'amount'         => 'Decimais do valor',
+                    'amount-info'    => 'Número de casas decimais mantidas para o valor inserido pelo usuário.',
+                    'base'           => 'Decimais do valor base',
+                    'base-info'      => 'Número de casas decimais mantidas para o valor convertido para a unidade padrão.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Este campo pode conter apenas letras, números e sublinhados.',
-        'label_format' => 'Este campo pode conter apenas letras, números, espaços e sublinhados.',
+        'code_format'      => 'Este campo pode conter apenas letras, números e sublinhados.',
+        'label_format'     => 'Este campo pode conter apenas letras, números, espaços e sublinhados.',
+        'max_conversions'  => 'Uma unidade não pode ter mais de :max operações de conversão.',
+        'max_units'        => 'Uma família de medição não pode ter mais de :max unidades.',
     ],
 
     'importers' => [
@@ -102,17 +145,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Família de medição criada com sucesso.',
-            'updated'               => 'Família de medição atualizada com sucesso.',
-            'deleted'               => 'Família de medição excluída com sucesso.',
-            'mass_deleted'          => 'Famílias de medição selecionadas excluídas com sucesso.',
-            'not_found'             => 'Família de medição não encontrada.',
-            'in_use'                => 'Esta família de medição é usada em atributos, portanto não pode ser excluída.',
-            'partially_deleted'     => 'Algumas famílias de medição não puderam ser excluídas porque são usadas em atributos.',
-            'standard_unit_invalid' => 'A unidade padrão deve ser uma das unidades fornecidas.',
-            'standard_unit_locked'  => 'A unidade padrão não pode ser alterada enquanto a família de medição estiver sendo usada por um atributo.',
-            'units_locked'          => 'Os códigos de unidade e as operações de conversão não podem ser alterados enquanto a família de medição estiver sendo usada por um atributo.',
-            'error'                 => 'Algo deu errado. Tente novamente.',
+            'created'                => 'Família de medição criada com sucesso.',
+            'updated'                => 'Família de medição atualizada com sucesso.',
+            'deleted'                => 'Família de medição excluída com sucesso.',
+            'mass_deleted'           => 'Famílias de medição selecionadas excluídas com sucesso.',
+            'not_found'              => 'Família de medição não encontrada.',
+            'in_use'                 => 'Esta família de medição é usada em atributos, portanto não pode ser excluída.',
+            'partially_deleted'      => 'Algumas famílias de medição não puderam ser excluídas porque são usadas em atributos.',
+            'standard_unit_invalid'  => 'A unidade padrão deve ser uma das unidades fornecidas.',
+            'standard_unit_locked'   => 'A unidade padrão não pode ser alterada enquanto a família de medição estiver sendo usada por um atributo.',
+            'units_locked'           => 'Os códigos de unidade e as operações de conversão não podem ser alterados enquanto a família de medição estiver sendo usada por um atributo.',
+            'limit_reached'          => 'O número máximo de famílias de medição (:max) foi atingido.',
+            'error'                  => 'Algo deu errado. Tente novamente.',
         ],
 
         'unit' => [

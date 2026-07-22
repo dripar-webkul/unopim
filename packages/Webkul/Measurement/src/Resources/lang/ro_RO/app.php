@@ -19,6 +19,24 @@ return [
         'sub' => 'Scădere',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'De la',
+        'to'        => 'Până la',
+        'operators' => [
+            'eq'            => 'Egal cu',
+            'neq'           => 'Diferit de',
+            'gt'            => 'Mai mare decât',
+            'gte'           => 'Mai mare sau egal cu',
+            'lt'            => 'Mai mic decât',
+            'lte'           => 'Mai mic sau egal cu',
+            'within_range'  => 'Între',
+            'outside_range' => 'Nu între',
+            'in_list'       => 'În',
+            'not_in_list'   => 'Nu în',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Creează Familie de Măsurare',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Șterge',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Catalog',
+            'info'        => 'Setări legate de catalog.',
+            'measurement' => [
+                'title'     => 'Măsurare',
+                'info'      => 'Setări legate de măsurare.',
+                'precision' => [
+                    'title'          => 'Precizie',
+                    'info'           => 'Controlați modul în care sunt stocate valorile de măsurare.',
+                    'strategy'       => 'Strategie zecimală',
+                    'strategy-info'  => 'Rotunjirea păstrează cea mai apropiată valoare, trunchierea elimină zecimalele suplimentare.',
+                    'strategy-round' => 'Rotunjire',
+                    'strategy-trim'  => 'Trunchiere',
+                    'amount'         => 'Zecimale ale sumei',
+                    'amount-info'    => 'Numărul de zecimale păstrate pentru valoarea introdusă de utilizator.',
+                    'base'           => 'Zecimale ale valorii de bază',
+                    'base-info'      => 'Numărul de zecimale păstrate pentru valoarea convertită în unitatea standard.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Acest câmp poate conține doar litere, cifre și caractere de subliniere.',
-        'label_format' => 'Acest câmp poate conține doar litere, cifre, spații și caractere de subliniere.',
+        'code_format'      => 'Acest câmp poate conține doar litere, cifre și caractere de subliniere.',
+        'label_format'     => 'Acest câmp poate conține doar litere, cifre, spații și caractere de subliniere.',
+        'max_conversions'  => 'O unitate nu poate avea mai mult de :max operații de conversie.',
+        'max_units'        => 'O familie de măsurare nu poate avea mai mult de :max unități.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Familia de măsurători a fost creată cu succes.',
-            'updated'               => 'Familia de măsurare a fost actualizată cu succes.',
-            'deleted'               => 'Familia de măsurare a fost ștearsă cu succes.',
-            'mass_deleted'          => 'Familiile de măsurare selectate au fost șterse cu succes.',
-            'not_found'             => 'Familia de măsurare nu a fost găsită.',
-            'in_use'                => 'Această familie de măsurare este utilizată în atribute, deci nu poate fi ștearsă.',
-            'partially_deleted'     => 'Unele familii de măsurare nu au putut fi șterse deoarece sunt utilizate în atribute.',
-            'standard_unit_invalid' => 'Unitatea standard trebuie să fie una dintre unitățile furnizate.',
-            'standard_unit_locked'  => 'Unitatea standard nu poate fi modificată atât timp cât familia de măsurare este utilizată de un atribut.',
-            'units_locked'          => 'Codurile unităților și operațiile de conversie nu pot fi modificate atât timp cât familia de măsurare este utilizată de un atribut.',
-            'error'                 => 'Ceva nu a funcționat corect. Vă rugăm să încercați din nou.',
+            'created'                => 'Familia de măsurători a fost creată cu succes.',
+            'updated'                => 'Familia de măsurare a fost actualizată cu succes.',
+            'deleted'                => 'Familia de măsurare a fost ștearsă cu succes.',
+            'mass_deleted'           => 'Familiile de măsurare selectate au fost șterse cu succes.',
+            'not_found'              => 'Familia de măsurare nu a fost găsită.',
+            'in_use'                 => 'Această familie de măsurare este utilizată în atribute, deci nu poate fi ștearsă.',
+            'partially_deleted'      => 'Unele familii de măsurare nu au putut fi șterse deoarece sunt utilizate în atribute.',
+            'standard_unit_invalid'  => 'Unitatea standard trebuie să fie una dintre unitățile furnizate.',
+            'standard_unit_locked'   => 'Unitatea standard nu poate fi modificată atât timp cât familia de măsurare este utilizată de un atribut.',
+            'units_locked'           => 'Codurile unităților și operațiile de conversie nu pot fi modificate atât timp cât familia de măsurare este utilizată de un atribut.',
+            'limit_reached'          => 'A fost atins numărul maxim de familii de măsurare (:max).',
+            'error'                  => 'Ceva nu a funcționat corect. Vă rugăm să încercați din nou.',
         ],
 
         'unit' => [

@@ -20,6 +20,24 @@ return [
         'sub' => '減',
     ],
 
+    'filter' => [
+        'operator'  => '運算子',
+        'from'      => '從',
+        'to'        => '到',
+        'operators' => [
+            'eq'            => '等於',
+            'neq'           => '不等於',
+            'gt'            => '大於',
+            'gte'           => '大於或等於',
+            'lt'            => '小於',
+            'lte'           => '小於或等於',
+            'within_range'  => '介於',
+            'outside_range' => '不介於',
+            'in_list'       => '屬於',
+            'not_in_list'   => '不屬於',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => '建立計量單位群組',
@@ -85,9 +103,34 @@ return [
         'delete'        => '刪除',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => '型錄',
+            'info'        => '型錄相關設定。',
+            'measurement' => [
+                'title'     => '計量',
+                'info'      => '計量相關設定。',
+                'precision' => [
+                    'title'          => '精度',
+                    'info'           => '控制計量值的儲存方式。',
+                    'strategy'       => '小數策略',
+                    'strategy-info'  => '四捨五入保留最接近的值，截斷會截去多餘的小數。',
+                    'strategy-round' => '四捨五入',
+                    'strategy-trim'  => '截斷',
+                    'amount'         => '數值小數位數',
+                    'amount-info'    => '為使用者輸入的值保留的小數位數。',
+                    'base'           => '基準值小數位數',
+                    'base-info'      => '轉換為標準單位後保留的小數位數。',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => '此欄位只能包含字母、數字和底線。',
-        'label_format' => '此欄位只能包含字母、數字、空格和底線。',
+        'code_format'      => '此欄位只能包含字母、數字和底線。',
+        'label_format'     => '此欄位只能包含字母、數字、空格和底線。',
+        'max_conversions'  => '一個單位不能擁有超過 :max 個轉換操作。',
+        'max_units'        => '一個計量單位群組不能擁有超過 :max 個單位。',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => '測量系列已成功建立。',
-            'updated'               => '計量單位群組已成功更新。',
-            'deleted'               => '計量單位群組已成功刪除。',
-            'mass_deleted'          => '所選計量單位群組已成功刪除。',
-            'not_found'             => '找不到計量單位群組。',
-            'in_use'                => '此計量單位群組已被屬性使用，無法刪除。',
-            'partially_deleted'     => '部分計量單位群組因被屬性使用而無法刪除。',
-            'standard_unit_invalid' => '標準單位必須是所提供單位之一。',
-            'standard_unit_locked'  => '當此計量單位群組被屬性使用時，無法變更標準單位。',
-            'units_locked'          => '當此計量單位群組被屬性使用時，無法變更單位代碼和轉換操作。',
-            'error'                 => '發生錯誤，請重試。',
+            'created'                => '測量系列已成功建立。',
+            'updated'                => '計量單位群組已成功更新。',
+            'deleted'                => '計量單位群組已成功刪除。',
+            'mass_deleted'           => '所選計量單位群組已成功刪除。',
+            'not_found'              => '找不到計量單位群組。',
+            'in_use'                 => '此計量單位群組已被屬性使用，無法刪除。',
+            'partially_deleted'      => '部分計量單位群組因被屬性使用而無法刪除。',
+            'standard_unit_invalid'  => '標準單位必須是所提供單位之一。',
+            'standard_unit_locked'   => '當此計量單位群組被屬性使用時，無法變更標準單位。',
+            'units_locked'           => '當此計量單位群組被屬性使用時，無法變更單位代碼和轉換操作。',
+            'limit_reached'          => '計量單位群組的最大數量 (:max) 已達到。',
+            'error'                  => '發生錯誤，請重試。',
         ],
 
         'unit' => [

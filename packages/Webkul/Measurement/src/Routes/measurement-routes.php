@@ -33,11 +33,4 @@ Route::group([
         Route::put('{attributeCode}', 'update')->name('admin.api.attribute-measurement.update');
     });
 
-    Route::controller(AttributeMeasurementApiController::class)->prefix('attribute-measurment')->group(function () {
-        Route::get('config/{attributeCode}', 'show')->name('admin.api.attribute-measurment.show');
-        Route::get('{familyCode}', 'getUnitsByFamily')->name('admin.api.attribute-measurment.getUnitsByFamily');
-        Route::post('{attributeCode}', 'store')->name('admin.api.attribute-measurment.store');
-        Route::put('{attributeCode}', 'update')->name('admin.api.attribute-measurment.update');
-    });
-
 });

@@ -20,6 +20,24 @@ return [
         'sub' => 'Trừ',
     ],
 
+    'filter' => [
+        'operator'  => 'Toán tử',
+        'from'      => 'Từ',
+        'to'        => 'Đến',
+        'operators' => [
+            'eq'            => 'Bằng',
+            'neq'           => 'Không bằng',
+            'gt'            => 'Lớn hơn',
+            'gte'           => 'Lớn hơn hoặc bằng',
+            'lt'            => 'Nhỏ hơn',
+            'lte'           => 'Nhỏ hơn hoặc bằng',
+            'within_range'  => 'Trong khoảng',
+            'outside_range' => 'Ngoài khoảng',
+            'in_list'       => 'Trong danh sách',
+            'not_in_list'   => 'Không trong danh sách',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Tạo Nhóm Đo lường',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Xóa',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Danh mục',
+            'info'        => 'Cài đặt liên quan đến danh mục.',
+            'measurement' => [
+                'title'     => 'Đo lường',
+                'info'      => 'Cài đặt liên quan đến đo lường.',
+                'precision' => [
+                    'title'          => 'Độ chính xác',
+                    'info'           => 'Kiểm soát cách các giá trị đo lường được lưu trữ.',
+                    'strategy'       => 'Chiến lược thập phân',
+                    'strategy-info'  => 'Làm tròn giữ giá trị gần nhất, cắt bớt loại bỏ các chữ số thập phân dư thừa.',
+                    'strategy-round' => 'Làm tròn',
+                    'strategy-trim'  => 'Cắt bớt',
+                    'amount'         => 'Số thập phân của giá trị',
+                    'amount-info'    => 'Số chữ số thập phân được giữ lại cho giá trị do người dùng nhập.',
+                    'base'           => 'Số thập phân của giá trị cơ sở',
+                    'base-info'      => 'Số chữ số thập phân được giữ lại cho giá trị đã chuyển đổi sang đơn vị chuẩn.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Trường này chỉ có thể chứa chữ cái, số và dấu gạch dưới.',
-        'label_format' => 'Trường này chỉ có thể chứa chữ cái, số, khoảng trắng và dấu gạch dưới.',
+        'code_format'      => 'Trường này chỉ có thể chứa chữ cái, số và dấu gạch dưới.',
+        'label_format'     => 'Trường này chỉ có thể chứa chữ cái, số, khoảng trắng và dấu gạch dưới.',
+        'max_conversions'  => 'Một đơn vị không thể có nhiều hơn :max hoạt động chuyển đổi.',
+        'max_units'        => 'Một nhóm đo lường không thể có nhiều hơn :max đơn vị.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Nhóm đo lường đã được tạo thành công.',
-            'updated'               => 'Nhóm đo lường đã được cập nhật thành công.',
-            'deleted'               => 'Nhóm đo lường đã được xóa thành công.',
-            'mass_deleted'          => 'Các nhóm đo lường được chọn đã xóa thành công.',
-            'not_found'             => 'Không tìm thấy nhóm đo lường.',
-            'in_use'                => 'Nhóm đo lường này đang được sử dụng trong các thuộc tính nên không thể xóa.',
-            'partially_deleted'     => 'Một số nhóm đo lường không thể xóa vì chúng đang được sử dụng trong các thuộc tính.',
-            'standard_unit_invalid' => 'Đơn vị chuẩn phải là một trong các đơn vị đã cung cấp.',
-            'standard_unit_locked'  => 'Không thể thay đổi đơn vị chuẩn khi nhóm đo lường đang được sử dụng bởi một thuộc tính.',
-            'units_locked'          => 'Không thể thay đổi mã đơn vị và các hoạt động chuyển đổi khi nhóm đo lường đang được sử dụng bởi một thuộc tính.',
-            'error'                 => 'Đã xảy ra lỗi. Vui lòng thử lại.',
+            'created'                => 'Nhóm đo lường đã được tạo thành công.',
+            'updated'                => 'Nhóm đo lường đã được cập nhật thành công.',
+            'deleted'                => 'Nhóm đo lường đã được xóa thành công.',
+            'mass_deleted'           => 'Các nhóm đo lường được chọn đã xóa thành công.',
+            'not_found'              => 'Không tìm thấy nhóm đo lường.',
+            'in_use'                 => 'Nhóm đo lường này đang được sử dụng trong các thuộc tính nên không thể xóa.',
+            'partially_deleted'      => 'Một số nhóm đo lường không thể xóa vì chúng đang được sử dụng trong các thuộc tính.',
+            'standard_unit_invalid'  => 'Đơn vị chuẩn phải là một trong các đơn vị đã cung cấp.',
+            'standard_unit_locked'   => 'Không thể thay đổi đơn vị chuẩn khi nhóm đo lường đang được sử dụng bởi một thuộc tính.',
+            'units_locked'           => 'Không thể thay đổi mã đơn vị và các hoạt động chuyển đổi khi nhóm đo lường đang được sử dụng bởi một thuộc tính.',
+            'limit_reached'          => 'Đã đạt đến số lượng tối đa của nhóm đo lường (:max).',
+            'error'                  => 'Đã xảy ra lỗi. Vui lòng thử lại.',
         ],
 
         'unit' => [

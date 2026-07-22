@@ -20,6 +20,24 @@ return [
         'sub' => 'Kurangi',
     ],
 
+    'filter' => [
+        'operator'  => 'Operator',
+        'from'      => 'Dari',
+        'to'        => 'Sampai',
+        'operators' => [
+            'eq'            => 'Sama dengan',
+            'neq'           => 'Tidak sama dengan',
+            'gt'            => 'Lebih besar dari',
+            'gte'           => 'Lebih besar atau sama dengan',
+            'lt'            => 'Lebih kecil dari',
+            'lte'           => 'Lebih kecil atau sama dengan',
+            'within_range'  => 'Antara',
+            'outside_range' => 'Tidak antara',
+            'in_list'       => 'Termasuk',
+            'not_in_list'   => 'Tidak termasuk',
+        ],
+    ],
+
     'measurement' => [
         'index' => [
             'create'                   => 'Buat Keluarga Pengukuran',
@@ -85,9 +103,34 @@ return [
         'delete'        => 'Hapus',
     ],
 
+    'config' => [
+        'catalog' => [
+            'title'       => 'Katalog',
+            'info'        => 'Pengaturan terkait katalog.',
+            'measurement' => [
+                'title'     => 'Pengukuran',
+                'info'      => 'Pengaturan terkait pengukuran.',
+                'precision' => [
+                    'title'          => 'Presisi',
+                    'info'           => 'Kontrol bagaimana nilai pengukuran disimpan.',
+                    'strategy'       => 'Strategi desimal',
+                    'strategy-info'  => 'Bulatkan mempertahankan nilai terdekat, potong memotong desimal tambahan.',
+                    'strategy-round' => 'Bulatkan',
+                    'strategy-trim'  => 'Potong',
+                    'amount'         => 'Desimal jumlah',
+                    'amount-info'    => 'Jumlah tempat desimal yang dipertahankan untuk nilai yang dimasukkan oleh pengguna.',
+                    'base'           => 'Desimal nilai dasar',
+                    'base-info'      => 'Jumlah tempat desimal yang dipertahankan untuk nilai yang dikonversi ke unit standar.',
+                ],
+            ],
+        ],
+    ],
+
     'validation' => [
-        'code_format'  => 'Bidang ini hanya boleh berisi huruf, angka, dan garis bawah.',
-        'label_format' => 'Bidang ini hanya boleh berisi huruf, angka, spasi, dan garis bawah.',
+        'code_format'      => 'Bidang ini hanya boleh berisi huruf, angka, dan garis bawah.',
+        'label_format'     => 'Bidang ini hanya boleh berisi huruf, angka, spasi, dan garis bawah.',
+        'max_conversions'  => 'Sebuah unit tidak dapat memiliki lebih dari :max operasi konversi.',
+        'max_units'        => 'Sebuah keluarga pengukuran tidak dapat memiliki lebih dari :max unit.',
     ],
 
     'importers' => [
@@ -100,17 +143,18 @@ return [
 
     'messages' => [
         'family' => [
-            'created'               => 'Keluarga pengukuran berhasil dibuat.',
-            'updated'               => 'Keluarga pengukuran berhasil diperbarui.',
-            'deleted'               => 'Keluarga pengukuran berhasil dihapus.',
-            'mass_deleted'          => 'Keluarga pengukuran yang dipilih berhasil dihapus.',
-            'not_found'             => 'Keluarga pengukuran tidak ditemukan.',
-            'in_use'                => 'Keluarga pengukuran ini digunakan dalam atribut, sehingga tidak dapat dihapus.',
-            'partially_deleted'     => 'Beberapa keluarga pengukuran tidak dapat dihapus karena digunakan dalam atribut.',
-            'standard_unit_invalid' => 'Unit standar harus salah satu dari unit yang disediakan.',
-            'standard_unit_locked'  => 'Unit standar tidak dapat diubah selama keluarga pengukuran digunakan oleh atribut.',
-            'units_locked'          => 'Kode unit dan operasi konversi tidak dapat diubah selama keluarga pengukuran digunakan oleh atribut.',
-            'error'                 => 'Terjadi kesalahan. Silakan coba lagi.',
+            'created'                => 'Keluarga pengukuran berhasil dibuat.',
+            'updated'                => 'Keluarga pengukuran berhasil diperbarui.',
+            'deleted'                => 'Keluarga pengukuran berhasil dihapus.',
+            'mass_deleted'           => 'Keluarga pengukuran yang dipilih berhasil dihapus.',
+            'not_found'              => 'Keluarga pengukuran tidak ditemukan.',
+            'in_use'                 => 'Keluarga pengukuran ini digunakan dalam atribut, sehingga tidak dapat dihapus.',
+            'partially_deleted'      => 'Beberapa keluarga pengukuran tidak dapat dihapus karena digunakan dalam atribut.',
+            'standard_unit_invalid'  => 'Unit standar harus salah satu dari unit yang disediakan.',
+            'standard_unit_locked'   => 'Unit standar tidak dapat diubah selama keluarga pengukuran digunakan oleh atribut.',
+            'units_locked'           => 'Kode unit dan operasi konversi tidak dapat diubah selama keluarga pengukuran digunakan oleh atribut.',
+            'limit_reached'          => 'Jumlah maksimum keluarga pengukuran (:max) telah tercapai.',
+            'error'                  => 'Terjadi kesalahan. Silakan coba lagi.',
         ],
 
         'unit' => [
